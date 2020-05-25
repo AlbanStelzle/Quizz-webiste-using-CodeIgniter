@@ -10,9 +10,7 @@ class model_connexion extends CI_Model
 		$query=$this->db->get('user');
 		foreach ($query->result() as $row)
 		{
-			echo $row->login;
-			echo $row->email;
-			echo $row->password;
+
 		}
 		return $row;
 	}
@@ -20,14 +18,9 @@ class model_connexion extends CI_Model
 	{
 		$this->db->where($data);
 		$query = $this->db->get('user');
-		//SELECT * FROM user WHERE email = '$data['email']' AND password = '$data['password']'
+
 		if($arg=$query->num_rows() > 0)
 		{
-			$data = array(
-				'login' => $arg[0],
-				'email' => $arg[1],
-				'password' => $arg[2]
-			);
 			return true;
 		}
 		else
