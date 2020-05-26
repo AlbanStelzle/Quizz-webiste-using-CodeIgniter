@@ -28,19 +28,17 @@ class Accueil extends CI_Controller
 		if ($this->form_validation->run()) {
 			$email = $this->input->post('Email');
 			$password = $this->input->post('Pwd');
-
-			$datadb=$this->model_connexion->getAll($email);
-
-			if (password_verify($password,$datadb->password)) {
-				echo "test";
-					session_start();
-					$session_data = array(
-						'login' => $datadb->login,
-						'email' => $email,
-						'id' => $datadb->id
-					);
-					$this->session->set_userdata($session_data);
-					redirect(MenuPrincipal);
+			$datadb = $this->model_connexion->getAll($email);
+			//echo $password;
+			if (password_verify($password, $datadb->password)) {
+				session_start();
+				$session_data = array(
+					'login' => $datadb->login,
+					'email' => $email,
+					'id' => $datadb->id
+				);
+				$this->session->set_userdata($session_data);
+				redirect(MenuPrincipal);
 
 			} else {
 				redirect('', 'refresh');
@@ -65,28 +63,23 @@ class Accueil extends CI_Controller
 			$login = $this->input->post('Login');
 			$email = $this->input->post('Email');
 			$password = $this->input->post('Pwd');
-			$pwdhash=password_hash($password, PASSWORD_DEFAULT);
-
+			$pwdhash = password_hash($password, PASSWORD_DEFAULT);
 			$data = array(
 				'login' => $login,
 				'email' => $email,
 				'password' => $pwdhash
 			);
 
-			if ($this->model_connexion->login($data)) {
-				$session_data = array(
-					'email' => $email
-				);
-				$this->session->set_userdata($session_data);
+			if (!($this->model_connexion->check($data))) {
 
-			} else {
 				$this->model_connexion->register($data);
 				redirect('', 'refresh');
 			}
-		} else {
-	$this->load->view('View_register');
+		}else {
+				$this->load->view('View_register');
+			}
 		}
-	}
+
 }
 
 ?>

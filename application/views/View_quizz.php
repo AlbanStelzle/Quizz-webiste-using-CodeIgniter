@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
-<title><?php echo $Nom ?></title>
+<title><?php echo $Nom[0] ?></title>
 <style>
 	input{
 		width:60px;
 	}
 </style>
+<link rel="stylesheet" href="http://www.iut-fbleau.fr/css/concise.min.css">
+<link rel="stylesheet" href="http://www.iut-fbleau.fr/css/concise-utils/concise-utils.min.css">
+<link rel="stylesheet" href="http://www.iut-fbleau.fr/css/concise-ui/concise-ui.min.css">
 <head>
 	<?php
 	$this->load->helper('form');
@@ -102,24 +105,55 @@
 			echo "<th>";
 			echo $image[$i];
 			echo "</th>";
+			echo "<th>";
+			echo form_open('/MenuPrincipal/DelQuestion/'.$question[$i].'/'.$clé[0]);
+			echo form_submit('DelQuest','Supprimer la question');
+			echo form_close();
+			echo $image[$i];
+			echo "</th>";
 			echo "</tr>";
 				}
-				echo "</tbody>";
-	echo "</table>";
+
+
 
 		echo "</div>";
-		echo form_open();
-		echo form_input($data_question);
-		echo form_input($data_reponse1);
-		echo form_input($data_reponse2);
-		echo form_input($data_reponse3);
-		echo form_input($data_reponse4);
-		echo form_input($data_image);
+		echo form_open('/MenuPrincipal/addQuestionToQuizz/'.$clé[0]);
+		echo "<th>";
 
+		echo form_input($data_question);
+		echo "</th>";
+
+		echo "<th>";
+
+		echo form_input($data_reponse1);
+		echo "</th>";
+
+		echo "<th>";
+
+		echo form_input($data_reponse2);
+		echo "</th>";
+
+		echo "<th>";
+
+		echo form_input($data_reponse3);
+		echo "</th>";
+
+		echo "<th>";
+
+		echo form_input($data_reponse4);
+		echo "</th>";
+
+		echo "<th>";
+
+		echo form_input($data_image);
+		echo "</th>";
+
+		echo "<th>";
 
 		echo form_submit('add','Ajouter');
 		echo form_close();
-
+		echo "</tbody>";
+		echo "</table>";
 
 
 

@@ -14,7 +14,7 @@ class model_connexion extends CI_Model
 		}
 		return $row;
 	}
-	public function login($data)
+	public function check($data)
 	{
 		$this->db->where($data);
 		$query = $this->db->get('user');
