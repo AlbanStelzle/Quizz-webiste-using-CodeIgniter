@@ -44,7 +44,7 @@ class Accueil extends CI_Controller
 			$this->load->view('template/View_template');
 			$this->load->view('template/View_template_center');
 
-			$this->load->view('View_accueil');
+		//	$this->load->view('View_accueil');
 
 		}
 	}
