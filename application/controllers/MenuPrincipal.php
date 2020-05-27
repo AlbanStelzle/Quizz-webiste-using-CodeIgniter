@@ -17,7 +17,7 @@ class MenuPrincipal extends CI_Controller
 
 	public function home()
 	{
-		$this->load->view('template/view_template');
+		$this->load->view('template/View_template');
 		$this->load->view('View_home');
 
 	}
@@ -27,14 +27,15 @@ class MenuPrincipal extends CI_Controller
 		$this->load->model('Model_quizz');
 		$id= $this->session->id;
 		$name=$this->Model_quizz->getAllQuizzNameAndKey($id);
-		$this->load->view('template/view_template');
+		$this->load->view('template/View_template');
+
 		$this->load->view('View_list_of_quizz',$name);
 
 	}
 	public function modifyQuizz($key){
 		$this->load->model('Model_quizz');
 		if(($data=$this->Model_quizz->getAllQuizzDataByKeyAndId($key,$this->session->id) )!= null){
-			$this->load->view('template/view_template');
+			$this->load->view('template/View_template');
 
 			$this->load->view('View_quizz',$data);
 
