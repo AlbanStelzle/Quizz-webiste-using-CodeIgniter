@@ -27,13 +27,12 @@ class model_quizz extends CI_Model
 			return $data;
 		}
 	}
-	public function getAllQuizzDataByKey($key,$id){
+	public function getAllQuizzDataByKeyAndId($key,$id){
 		$this->db->where('clé',$key);
 		$this->db->where('id',$id);
 		if($id === null){
 			return false;
 		}
-		$this->db->select('Nom,question,reponse1,reponse2,reponse3,reponse4,image,clé');
 		$query=$this->db->get('Quizz');
 		$result=$query->result_array();
 		$i=0;
@@ -43,6 +42,21 @@ class model_quizz extends CI_Model
 				$data[$key2][$i]=$value;
 			}
 		$i++;
+
+		}
+		return $data;
+	}
+	public function getAllQuizzDataByKey($key){
+		$this->db->where('clé',$key);
+		$query=$this->db->get('Quizz');
+		$result=$query->result_array();
+		$i=0;
+		foreach ($result as $row)
+		{
+			foreach($row as $key2=>$value){
+				$data[$key2][$i]=$value;
+			}
+			$i++;
 
 		}
 		return $data;
@@ -62,6 +76,7 @@ class model_quizz extends CI_Model
 
 		$data = array(
 			'id'=> $this->session->id,
+			'question'=>null,
 			'Nom'=> trim($title),
 			'clé'=>$key
 		);
@@ -82,11 +97,36 @@ class model_quizz extends CI_Model
 		$this->db->delete('Quizz');
 
 	}
-	public function addQuestionToQuizz($data){
-		$this->db->insert('Quizz', $data);
+	public function replaceQuestionToQuizz($tab,$data){
+
+		$this->db->where($tab);
+		$query=$this->db->get('Quizz');
+
+		if($arg=$query->num_rows() > 0) {
+			$this->db->update('Quizz', $data);
+			return true;
+		}else {
+			return false;
+
+		}
 	}
-	public function delQuestionByName($name){
-		$this->db->where('question',$name);
+	public function addQuestionToQuizz($data){
+		$tab=array(
+			'clé'=> $data['clé'],
+			'question'=>null,
+			'Nom'=>$data['Nom']);
+		$test=$this->replaceQuestionToQuizz($tab,$data);
+
+		if($test) {
+			return true;
+		}else {
+			$this->db->insert('Quizz', $data);
+
+		}
+
+	}
+	public function delQuestionById($id){
+		$this->db->where('idQuestion',$id);
 		$this->db->delete('Quizz');
 	}
 

@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html>
 <title><?php echo $Nom[0] ?></title>
-<style>
-	input{
-		width:60px;
-	}
-</style>
-<link rel="stylesheet" href="http://www.iut-fbleau.fr/css/concise.min.css">
-<link rel="stylesheet" href="http://www.iut-fbleau.fr/css/concise-utils/concise-utils.min.css">
-<link rel="stylesheet" href="http://www.iut-fbleau.fr/css/concise-ui/concise-ui.min.css">
+
 <head>
 	<?php
 	$this->load->helper('form');
@@ -17,15 +10,19 @@
 	$data_question = array(
 			'type'  => 'text',
 			'name'  => 'question',
-			'id'    => 'question',
 			'placeholder' => 'Question',
+			'class' => 'input',
+			'required' => 'required'
+	);	$data_réponse = array(
+			'type'  => 'text',
+			'name'  => 'BonneRéponse',
+			'placeholder' => 'Numéros réponses',
 			'class' => 'input',
 			'required' => 'required'
 	);
 	$data_reponse1 = array(
 			'type'  => 'text',
 			'name'  => 'reponse1',
-			'id'    => 'reponse1',
 			'placeholder' => 'reponse1',
 			'class' => 'input',
 			'required' => 'required'
@@ -62,54 +59,60 @@
 	?>
 </head>
 
-<div>
+<div class="table-responsive">
 	<h1><?php echo $Nom[0] ?></h1>
-	<table>
-		<thead>
+	<table class="table table-hover table-bordered">
+		<thead class="thead-dark">
 		<tr>
-			<th>Question</th>
-			<th>reponse 1</th>
-			<th>reponse 2</th>
-			<th>reponse 3</th>
-			<th>reponse 4</th>
-			<th>image</th>
+			<th scope="col">Question</th>
+			<th scope="col">reponse 1</th>
+			<th scope="col">reponse 2</th>
+			<th scope="col">reponse 3</th>
+			<th scope="col">reponse 4</th>
+			<th scope="col">image</th>
+			<th scope="col">Bonne réponse</th>
+			<th scope="col">Action</th>
 
 		</tr>
 		</thead>
 		<tbody>
-		<div>
 		<?php
 
 
 		for ($i = 0; $i < sizeof($Nom); $i++) {
+		if(isset($question[$i])) {
+
 			echo "<tr>";
 
-			echo "<th>";
+			echo "<th scope=\"row\">";
 			echo $question[$i];
 			echo "</th>";
 
-			echo "<th>";
+			echo "<th scope=\"row\">";
 			echo $reponse1[$i];
 			echo "</th>";
 
-			echo "<th>";
+			echo "<th scope=\"row\">";
 			echo $reponse2[$i];
 			echo "</th>";
-			echo "<th>";
+			echo "<th scope=\"row\">";
 			echo $reponse3[$i];
 			echo "</th>";
-			echo "<th>";
+			echo "<th scope=\"row\">";
 			echo $reponse4[$i];
 			echo "</th>";
 
-			echo "<th>";
+			echo "<th scope=\"row\">";
 			echo $image[$i];
 			echo "</th>";
-			echo "<th>";
-			echo form_open('/MenuPrincipal/DelQuestion/'.$question[$i].'/'.$clé[0]);
-			echo form_submit('DelQuest','Supprimer la question');
-			echo form_close();
-			echo $image[$i];
+			echo "<th scope=\"row\">";
+			echo $BonneRéponse[$i];
+			echo "</th>";
+			echo "<th scope=\"row\">";
+				echo form_open('/MenuPrincipal/DelQuestion/' . $idQuestion[$i]. '/' . $clé[0]);
+				echo form_submit('DelQuest', 'Supprimer la question',array('class'=>'btn btn-danger'));
+				echo form_close();
+			}
 			echo "</th>";
 			echo "</tr>";
 				}
@@ -147,13 +150,17 @@
 
 		echo form_input($data_image);
 		echo "</th>";
-
 		echo "<th>";
 
-		echo form_submit('add','Ajouter');
+		echo form_input($data_réponse);
+		echo "</th>";
+		echo "<th>";
+
+		echo form_submit('add','Ajouter',array('class'=>'btn btn-success '));
 		echo form_close();
 		echo "</tbody>";
 		echo "</table>";
+		echo anchor('MenuPrincipal/quizzHub','Retour à la liste de vos quizz');
 
 
 

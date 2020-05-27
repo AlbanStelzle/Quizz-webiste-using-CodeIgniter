@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
-<title>Se connecter</title>
-<head>
 
-</head>
-<body>
 <?php
 
 $mail=$_POST['Email'] ?? "";
@@ -14,42 +8,44 @@ $this->load->library("form_validation");
 $data_email = array(
 		'type'  => 'Email',
 		'name'  => 'Email',
-		'id'    => 'Email',
+		'id'    => 'inputEmail',
 		'value' => $mail,
 		'placeholder' => 'Email',
-		'class' => 'input',
+		'class' => 'form-control',
 		'required' => 'required'
 );
 $data_pwd = array(
 		'type'  => 'password',
 		'name'  => 'Pwd',
-		'id'    => 'Pwd',
+		'id'    => 'inputPassword',
 		'placeholder' => 'Mot de passe',
-		'class' => 'input',
+		'class' => 'form-control',
 		'required' => 'required'
 );
 ?>
-<div>
-	<h1>Connexion</h1>
-	<?php  echo form_open();
+<body class="text-center">
 
+	<?php  echo form_open('',array('class'=>'form-signin'));
+	echo"<h1 class=\" h3 mb-3 font-weight-normal\">Connexion</h1>";
 	 echo form_input($data_email);
 	 echo form_error('Email');
-	echo "<br/>";
+	echo "<br>";
 
 	 echo form_input($data_pwd);
 	 echo form_error('Pwd');
-	echo "<br/>";
-	echo form_submit('connect','Se connecter');
+	echo "<br>";
+	echo form_submit('connect','Se connecter',array('class'=>'btn btn-lg btn-primary btn-block'));
+	echo anchor('Accueil/register','S\'enregistrer',array('class'=>"h3 mb-3 font-weight-normal",'style'=>'font-size:1em;'));
+	echo "<br>";
+	echo anchor('Accueil/join','Lancer un quizz',array('class'=>"h3 mb-3 font-weight-normal",'style'=>'font-size:1em;'));
+
 	echo form_close();
 	echo validation_errors();
-	echo anchor('Accueil/register','S\'enregistrer');
 
 	?>
 
 
-</div>
 
 
 </body>
-</html>
+

@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<title>Se connecter</title>
-<head>
 
-</head>
+<title>Se connecter</title>
+
 <?php
 $this->load->helper('form');
 $this->load->helper('url');
@@ -13,7 +10,7 @@ $data_login = array(
 	'name'  => 'Login',
 	'id'    => 'Login',
 	'placeholder' => 'Nom',
-	'class' => 'input',
+		'class' => 'form-control',
 	'required' => 'required'
 );
 $data_email = array(
@@ -21,7 +18,7 @@ $data_email = array(
 	'name'  => 'Email',
 	'id'    => 'Email',
 	'placeholder' => 'Email',
-	'class' => 'input',
+	'class' => 'form-control',
 	'required' => 'required'
 );
 $data_pwd = array(
@@ -29,34 +26,33 @@ $data_pwd = array(
 	'name'  => 'Pwd',
 	'id'    => 'Pwd',
 	'placeholder' => 'Mot de passe',
-	'class' => 'input',
+	'class' => 'form-control',
 	'required' => 'required'
 );
 ?>
-<div>
-	<h1>Connexion</h1>
-<?php  echo form_open();
+<body class="text-center">
+<?php  echo form_open('',array('class'=>'form-signin'));
+	echo "<h1 class=\" h3 mb-3 font-weight-normal\">S'enregistrer</h1>";
 
 echo form_input($data_login);
 echo form_error('login');
-echo "<br/>";
+echo "<br>";
 echo form_input($data_email);
 echo form_error('email');
-echo "<br/>";
+echo "<br>";
 
 echo form_input($data_pwd);
 echo form_error('Pwd');
 
-echo "<br/>";
-echo form_submit('Register','S\'enregistrer');
+echo "<br>";
+echo form_submit('Register','S\'enregistrer',array('class'=>'btn btn-lg btn-primary btn-block'));
+
+echo anchor('Accueil/login','Se connecter',array('class'=>"h3 mb-3 font-weight-normal",'style'=>'font-size:1em;'));
 echo form_close();
 echo validation_errors();
-echo anchor('Accueil/login','Se connecter');
-
 	?>
 
 
-</div>
 
 
 </body>

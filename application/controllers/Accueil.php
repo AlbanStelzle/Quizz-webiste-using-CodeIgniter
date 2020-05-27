@@ -7,8 +7,6 @@ class Accueil extends CI_Controller
 		$this->load->library('session');
 		$this->load->helper('url');
 		$this->load->library('form_validation');
-
-
 	}
 
 	public function index()
@@ -20,7 +18,7 @@ class Accueil extends CI_Controller
 	public function login()
 	{
 		$this->load->helper('form');
-		$this->load->model('model_connexion');
+		$this->load->model('Model_connexion');
 		$this->form_validation->set_rules('email', 'Email', 'valid_email|is_unique');
 		$this->form_validation->set_rules('Pwd', 'Mot de passe', 'required|trim');
 		$this->form_validation->set_message('is_unique', '{field} existe pas dans la base.');
@@ -28,8 +26,7 @@ class Accueil extends CI_Controller
 		if ($this->form_validation->run()) {
 			$email = $this->input->post('Email');
 			$password = $this->input->post('Pwd');
-			$datadb = $this->model_connexion->getAll($email);
-			//echo $password;
+			$datadb = $this->Model_connexion->getAll($email);
 			if (password_verify($password, $datadb->password)) {
 				session_start();
 				$session_data = array(
@@ -44,6 +41,9 @@ class Accueil extends CI_Controller
 				redirect('', 'refresh');
 			}
 		} else {
+			$this->load->view('template/View_template');
+			$this->load->view('template/View_template_center');
+
 			$this->load->view('View_accueil');
 
 		}
@@ -53,7 +53,7 @@ class Accueil extends CI_Controller
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$this->load->model('model_connexion');
+		$this->load->model('Model_connexion');
 
 		$this->form_validation->set_rules('email', 'Email', 'valid_email|is_unique[user.email]');
 		$this->form_validation->set_rules('Pwd', 'Mot de passe', 'required|trim');
@@ -70,14 +70,22 @@ class Accueil extends CI_Controller
 				'password' => $pwdhash
 			);
 
-			if (!($this->model_connexion->check($data))) {
+			if (!($this->Model_connexion->check($data))) {
 
-				$this->model_connexion->register($data);
+				$this->Model_connexion->register($data);
 				redirect('', 'refresh');
 			}
 		}else {
-				$this->load->view('View_register');
+			$this->load->view('template/View_template');
+			$this->load->view('template/View_template_center');
+			$this->load->view('View_register');
 			}
+		}
+		public function join(){
+			$this->load->view('template/View_template');
+			$this->load->view('template/View_template_center');
+
+			$this->load->view('View_join');
 		}
 
 }
