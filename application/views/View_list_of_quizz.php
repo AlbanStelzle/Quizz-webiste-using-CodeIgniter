@@ -2,6 +2,7 @@
 <html>
 <title>Mes quizz !</title>
 <head>
+
 	<?php
 	$this->load->helper('url');
 	$this->load->library('form_validation');
@@ -13,6 +14,17 @@
 			'class' => 'form-control',
 	);
 	?>
+	<script>
+		$(document).ready(function(){
+			$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+				localStorage.setItem('activeTab', $(e.target).attr('href'));
+			});
+			var activeTab = localStorage.getItem('activeTab');
+			if(activeTab){
+				$('#myTab a[href="' + activeTab + '"]').tab('show');
+			}
+		});
+	</script>
 </head>
 	<div class="w-auto">
 	<h1 class="display-4">Liste de vos quizz</h1>
@@ -59,10 +71,15 @@
 						echo form_close();
 						echo "</th>";
 						echo "<th scope=\"row\">";
-						echo form_open("./MenuPrincipal/modifyQuizz/" . $clé[$i]);
-						echo form_submit('ModifyQuizz' . $clé[$i], 'Modifier ce quizz',array('class'=>'btn btn-warning'));
-						echo form_close();
 
+						if(!($statut[$i]=='Expiré'||$statut[$i]=='Actif')) {
+							echo form_open("./MenuPrincipal/modifyQuizz/" . $clé[$i]);
+							echo form_submit('ModifyQuizz' . $clé[$i], 'Modifier ce quizz', array('class' => 'btn btn-warning'));
+							echo form_close();
+						}else{
+							echo form_button('Useless','Modifier ce quizz',array('class'=>'btn btn-warning',
+																							  'disabled'=>'disabled'));
+						}
 						echo "</th>";
 						echo "<th scope=\"row\">";
 						echo form_open("./MenuPrincipal/deleteQuizzByKey/" . $clé[$i]);
@@ -73,27 +90,17 @@
 						echo "</tr>";
 
 					}
+				}else{
+					echo"<tr>
+						 	<th colspan='5' class='text-center'>Vous n'avez aucun quizz de créer.</th>
+						 </tr>";
 				}
-				echo "<tr>";
-				echo "<th>";
-				echo form_open('MenuPrincipal/addQuizzByTitle/');
-				echo form_input($data_quizz);
-				echo form_error('QuizzName','<div class="alert alert-danger" role="alert">','</div>');
-				echo "</th>";
-				echo "<th scope=\"row\">";
 
-				echo form_submit('ButtonAddQuizz', 'Ajouter le quizz',array('class'=>'btn btn-success'));
-
-				echo form_close();
-				echo "</th>";
-
-				echo "</tr>";
 				?>
 				</tbody>
 			</table>
 		</div>
 	</div>
-
 	<div class="tab-pane fade show active" id="actif" role="tabpanel" aria-labelledby="actif-tab">
 		<div class="table-responsive">
 
@@ -113,7 +120,6 @@
 
 					for ($i = 0; $i < sizeof($Nom); $i++) {
 						if (strcmp($statut[$i], 'Actif')===0) {
-							echo $statut[$i];
 							echo "<tr>";
 							echo "<th scope=\"row\">$Nom[$i] </th>";
 							echo "<th scope=\"row\">";
@@ -122,7 +128,8 @@
 							echo "</th>";
 							echo "<th scope=\"row\">";
 							echo form_open("./MenuPrincipal/modifyQuizz/" . $clé[$i]);
-							echo form_submit('ModifyQuizz' . $clé[$i], 'Modifier ce quizz', array('class' => 'btn btn-warning'));
+							echo form_submit('ModifyQuizz' . $clé[$i], 'Modifier ce quizz', array('class'=>'btn btn-warning',
+									'disabled'=>'disabled'));
 							echo form_close();
 
 							echo "</th>";
@@ -141,21 +148,12 @@
 
 						}
 					}
+				}else{
+					echo"<tr>
+						 	<th colspan='5' class='text-center'>Vous n'avez aucun quizz de créer.</th>
+						 </tr>";
 				}
-				echo "<tr>";
-				echo "<th>";
-				echo form_open('MenuPrincipal/addQuizzByTitle/');
-				echo form_input($data_quizz);
-				echo form_error('QuizzName','<div class="alert alert-danger" role="alert">','</div>');
-				echo "</th>";
-				echo "<th scope=\"row\">";
 
-				echo form_submit('ButtonAddQuizz', 'Ajouter le quizz',array('class'=>'btn btn-success'));
-
-				echo form_close();
-				echo "</th>";
-
-				echo "</tr>";
 				?>
 				</tbody>
 			</table>
@@ -169,7 +167,7 @@
 				<tr>
 					<th scope="col">Question</th>
 					<th scope="col">Clé</th>
-					<th scope="col" colspan="3">Action</th>
+					<th scope="col" colspan="6">Action</th>
 
 				</tr>
 				</thead>
@@ -179,7 +177,6 @@
 
 				if (isset($Nom)) {
 					for ($i = 0; $i < sizeof($Nom); $i++) {
-						echo $statut[$i];
 						if (strcmp($statut[$i], 'En préparation') === 0) {
 
 							echo "<tr>";
@@ -201,8 +198,8 @@
 							echo "</th>";
 
 							echo "<th scope=\"row\">";
-							echo form_open('MenuPrincipal/ActiveQuizz/' . $clé[$i]);
-							echo form_submit("ActivateQuizz['$i']", 'Activer ce quizz', array('class' => 'btn btn-info'));
+							echo form_open('MenuPrincipal/ActiveQuizz/'.$clé[$i]);
+							echo form_submit("ActivateQuizz", 'Activer ce quizz', array('class' => 'btn btn-info'));
 							echo form_close();
 							echo "</th>";
 
@@ -210,6 +207,12 @@
 
 						}
 					}
+				}else{
+					echo"<tr>
+						 	<th colspan='5' class='text-center'>Vous n'avez aucun quizz de créer.</th>
+
+
+						 </tr>";
 				}
 				echo "<tr>";
 				echo "<th>";
@@ -236,7 +239,7 @@
 			<table class="table table-hover table-bordered">
 				<thead class="thead-dark">
 				<tr>
-					<th scope="col">Question</th>
+					<th scope="col" >Question</th>
 					<th scope="col">Clé</th>
 					<th scope="col" colspan="3">Action</th>
 
@@ -258,7 +261,8 @@
 							echo "</th>";
 							echo "<th scope=\"row\">";
 							echo form_open("./MenuPrincipal/modifyQuizz/" . $clé[$i]);
-							echo form_submit('ModifyQuizz' . $clé[$i], 'Modifier ce quizz', array('class' => 'btn btn-warning'));
+							echo form_submit('ModifyQuizz' . $clé[$i], 'Modifier ce quizz', array('class'=>'btn btn-warning',
+									'disabled'=>'disabled'));
 							echo form_close();
 
 							echo "</th>";
@@ -277,21 +281,12 @@
 
 						}
 					}
+				}else{
+					echo"<tr>
+						 	<th colspan='5' class='text-center'>Vous n'avez aucun quizz de créer.</th>
+						 </tr>";
 				}
-				echo "<tr>";
-				echo "<th>";
-				echo form_open('MenuPrincipal/addQuizzByTitle/');
-				echo form_input($data_quizz);
-				echo form_error('QuizzName','<div class="alert alert-danger" role="alert">','</div>');
-				echo "</th>";
-				echo "<th scope=\"row\">";
 
-				echo form_submit('ButtonAddQuizz', 'Ajouter le quizz',array('class'=>'btn btn-success'));
-
-				echo form_close();
-				echo "</th>";
-
-				echo "</tr>";
 				?>
 				</tbody>
 			</table>

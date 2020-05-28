@@ -59,7 +59,7 @@ class MenuPrincipal extends CI_Controller
 	public function deleteQuizzByKey($key){
 		$this->load->model('Model_quizz');
 		$this->Model_quizz->deleteQuizzByKey($key);
-		redirect('MenuPrincipal/QuizzHub');
+		redirect('MenuPrincipal/quizzHub','refresh');
 	}
 	public function addQuestionToQuizz($key){
 
@@ -96,30 +96,26 @@ class MenuPrincipal extends CI_Controller
 		}
 
 	}
-	public function html_clean($s) {
-		return strip_tags($s);
-	}
 
-	public function DelQuestion($idQuestion,$key){
+	public function DelQuestion($idQuestion){
 		$this->load->model('Model_quizz');
 
 		$this->Model_quizz->delQuestionById($idQuestion);
-		redirect('MenuPrincipal/modifyQuizz/'.$key);
+		redirect('MenuPrincipal/quizzHub','refresh');
 
 	}
 
 	public function ActiveQuizz($key){
 		$this->load->model('Model_quizz');
 		$this->Model_quizz->ActiveQuizzByKey($key);
-		redirect('MenuPrincipal/quizzHub');
+		redirect('MenuPrincipal/quizzHub','refresh');
 
 	}
 
 	public function ExpiredQuizz($key){
 		$this->load->model('Model_quizz');
 		$this->Model_quizz->ExpiredQuizzByKey($key);
-		redirect('MenuPrincipal/quizzHub');
-
+		redirect('MenuPrincipal/quizzHub','refresh');
 	}
 
 }

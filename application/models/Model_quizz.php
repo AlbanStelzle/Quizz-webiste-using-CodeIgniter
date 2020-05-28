@@ -112,6 +112,7 @@ class model_quizz extends CI_Model
 	}
 
 	public function ActiveQuizzByKey($key){
+
 		$data = array('statut' => 'Actif');
 		$this->db->where('clé',$key);
 		$this->db->update('Quizz',$data);
