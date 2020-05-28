@@ -19,7 +19,7 @@ class Accueil extends CI_Controller
 	{
 		$this->load->helper('form');
 		$this->load->model('Model_connexion');
-		$this->form_validation->set_rules('email', 'Email', 'valid_email|is_unique');
+		$this->form_validation->set_rules('Email', 'Email', 'valid_email');
 		$this->form_validation->set_rules('Pwd', 'Mot de passe', 'required|trim');
 		$this->form_validation->set_message('is_unique', '{field} existe pas dans la base.');
 
@@ -38,13 +38,16 @@ class Accueil extends CI_Controller
 				redirect(MenuPrincipal);
 
 			} else {
-				redirect('', 'refresh');
+				$this->load->view('template/View_template');
+				$this->load->view('template/View_template_center');
+
+				$this->load->view('View_accueil');
 			}
 		} else {
 			$this->load->view('template/View_template');
 			$this->load->view('template/View_template_center');
 
-		//	$this->load->view('View_accueil');
+			$this->load->view('View_accueil');
 
 		}
 	}
@@ -55,12 +58,13 @@ class Accueil extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->model('Model_connexion');
 
-		$this->form_validation->set_rules('email', 'Email', 'valid_email|is_unique[user.email]');
-		$this->form_validation->set_rules('Pwd', 'Mot de passe', 'required|trim');
+		$this->form_validation->set_rules('Login', 'Login', 'required');
+		$this->form_validation->set_rules('Email', 'Email', 'valid_email|required|is_unique[user.email]');
+		$this->form_validation->set_rules('Pwd', 'Pwd', 'required|trim');
 		$this->form_validation->set_message('is_unique', '{field} est déjà présent dans la base.');
 
 		if ($this->form_validation->run()) {
-			$login = $this->input->post('Login');
+			$login = ($this->input->post('Login'));
 			$email = $this->input->post('Email');
 			$password = $this->input->post('Pwd');
 			$pwdhash = password_hash($password, PASSWORD_DEFAULT);
@@ -70,11 +74,9 @@ class Accueil extends CI_Controller
 				'password' => $pwdhash
 			);
 
-			if (!($this->Model_connexion->check($data))) {
 
 				$this->Model_connexion->register($data);
-				redirect('', 'refresh');
-			}
+			redirect('', 'refresh');
 		}else {
 			$this->load->view('template/View_template');
 			$this->load->view('template/View_template_center');

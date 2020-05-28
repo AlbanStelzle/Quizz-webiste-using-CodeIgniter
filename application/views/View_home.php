@@ -14,9 +14,9 @@ $this->load->library('session');
 <div>
 	<?php
 	$name=$this->session->login;
-	echo "<h1> Bienvenu $name </h1>";
-	echo anchor('MenuPrincipal/quizzHub','Liste des quizz');
-	echo anchor('Accueil','Se déconnecter');
+	echo "<h1> Bienvenue $name </h1>";
+	echo anchor('MenuPrincipal/quizzHub','Liste des quizz',array('class'=>'btn btn-info'));
+	echo anchor('Accueil','Se déconnecter',array('class'=>'btn btn-danger'));
 	?>
 
 

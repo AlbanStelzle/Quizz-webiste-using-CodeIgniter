@@ -14,7 +14,6 @@ class Quizz extends CI_Controller
 		$key=$this->input->post('clé');
 		$data=$this->Model_quizz->getAllQuizzDataByKey($key);
 		$this->load->view('template/View_template');
-		$this->load->view('template/View_template_center');
 
 		$this->load->view('View_fillQuizz',$data);
 	}
