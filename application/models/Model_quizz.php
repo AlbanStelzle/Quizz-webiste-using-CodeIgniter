@@ -117,5 +117,11 @@ class model_quizz extends CI_Model
 		$this->db->update('Quizz',$data);
 	}
 
+	public function ExpiredQuizzByKey($key){
+		$data = array('statut' => 'Expiré');
+		$this->db->where('clé',$key);
+		$this->db->update('Quizz',$data);
+	}
+
 }
 

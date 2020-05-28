@@ -110,6 +110,7 @@
 				<?php
 
 				if (isset($Nom) ) {
+
 					for ($i = 0; $i < sizeof($Nom); $i++) {
 						if (strcmp($statut[$i], 'Actif')===0) {
 							echo $statut[$i];
@@ -132,7 +133,7 @@
 							echo "</th>";
 
 							echo "<th scope=\"row\">";
-							echo form_open('' . $clé[$i]);
+							echo form_open('MenuPrincipal/ExpiredQuizz/' . $clé[$i]);
 							echo form_submit("DisableQuizz['$i']", 'Désactiver ce quizz', array('class' => 'btn btn-info'));
 							echo form_close();
 							echo "</th>";
@@ -247,7 +248,7 @@
 
 				if (isset($Nom)) {
 					for ($i = 0; $i < sizeof($Nom); $i++) {
-						if (strcmp($statut[$i], 'En préparation') === 0) {
+						if (strcmp($statut[$i], 'Expiré') === 0) {
 
 							echo "<tr>";
 							echo "<th scope=\"row\">$Nom[$i] </th>";

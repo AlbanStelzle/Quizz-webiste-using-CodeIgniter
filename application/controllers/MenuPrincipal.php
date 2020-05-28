@@ -115,5 +115,12 @@ class MenuPrincipal extends CI_Controller
 
 	}
 
+	public function ExpiredQuizz($key){
+		$this->load->model('Model_quizz');
+		$this->Model_quizz->ExpiredQuizzByKey($key);
+		redirect('MenuPrincipal/quizzHub');
+
+	}
+
 }
 ?>
