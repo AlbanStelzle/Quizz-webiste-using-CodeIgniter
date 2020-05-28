@@ -108,5 +108,12 @@ class MenuPrincipal extends CI_Controller
 
 	}
 
+	public function ActiveQuizz($key){
+		$this->load->model('Model_quizz');
+		$this->Model_quizz->ActiveQuizzByKey($key);
+		redirect('MenuPrincipal/quizzHub');
+
+	}
+
 }
 ?>

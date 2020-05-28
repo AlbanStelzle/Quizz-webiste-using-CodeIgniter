@@ -111,5 +111,11 @@ class model_quizz extends CI_Model
 		$this->db->delete('Quizz');
 	}
 
+	public function ActiveQuizzByKey($key){
+		$data = array('statut' => 'Actif');
+		$this->db->where('clé',$key);
+		$this->db->update('Quizz',$data);
+	}
+
 }
 

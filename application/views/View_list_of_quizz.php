@@ -200,7 +200,7 @@
 							echo "</th>";
 
 							echo "<th scope=\"row\">";
-							echo form_open('' . $clé[$i]);
+							echo form_open('MenuPrincipal/ActiveQuizz/' . $clé[$i]);
 							echo form_submit("ActivateQuizz['$i']", 'Activer ce quizz', array('class' => 'btn btn-info'));
 							echo form_close();
 							echo "</th>";
