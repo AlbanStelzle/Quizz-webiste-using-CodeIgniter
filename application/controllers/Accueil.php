@@ -122,8 +122,8 @@ class Accueil extends CI_Controller
 		public function join(){
 			$this->load->view('template/View_template');
 			$this->load->view('template/View_template_center');
-
 			$this->load->view('View_join');
+
 		}
 
 }

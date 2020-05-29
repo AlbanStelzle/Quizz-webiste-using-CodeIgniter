@@ -74,7 +74,7 @@ class MenuPrincipal extends CI_Controller
 		$this->form_validation->set_rules('reponse2', 'reponse2', 'required|htmlentities','2 réponses minimum sont nécessaires');
 		$this->form_validation->set_rules('reponse3', 'reponse3','htmlentities' );
 		$this->form_validation->set_rules('reponse4', 'reponse4','htmlentities' );
-		$this->form_validation->set_rules('image', 'url d\'une image', 'strip_tags');
+		$this->form_validation->set_rules('image', 'url d\'une image', 'strip_tags|valid_url');
 
 		if ($this->form_validation->run()) {
 			$data = array(

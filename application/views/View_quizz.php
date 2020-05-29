@@ -100,7 +100,7 @@
 
 				echo "<th scope=\"row\">";
 				if ($image[$i] != null) {
-					echo "<img src=\"$image[$i]\" class=\"rounded mx-auto d-block\" style='width:100px' alt=\"$image[$i]\">";
+					echo "<img src=\"$image[$i]\" class=\"rounded mx-auto d-block\" style='width:100px'>";
 
 				}
 				echo "</th>";

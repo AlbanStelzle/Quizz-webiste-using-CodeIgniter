@@ -7,6 +7,20 @@ $data_clé = array(
 	'class' => "form-control ",
 	'required' => 'required'
 );
+$data_prenom = array(
+		'type'  => 'text',
+		'name'  => 'prenom',
+		'placeholder' => 'Prénom',
+		'class' => "form-control ",
+		'required' => 'required'
+);
+$data_nom = array(
+		'type'  => 'text',
+		'name'  => 'nom',
+		'placeholder' => 'Nom',
+		'class' => "form-control ",
+		'required' => 'required'
+);
 
 ?>
 
@@ -15,6 +29,11 @@ $data_clé = array(
 	echo"<h1 class=\" h3 mb-3 font-weight-normal\">Quizz</h1>";
 
 	echo form_input($data_clé);
+	echo "<br>";
+	echo form_input($data_prenom);
+	echo "<br>";
+
+	echo form_input($data_nom);
 
 	echo "<br>";
 
