@@ -13,6 +13,22 @@
 			'placeholder' => 'Nom du quizz',
 			'class' => 'form-control',
 	);
+	if (!isset($_GET['numpage'])) {
+		$numpage = 1;
+	} else {
+		$numpage = $_GET['numpage'];
+	}
+	$nbitem = 11;
+	if ($numpage == 1) {
+		$llim = 0;
+		$rlim = $numpage * $nbitem;
+
+	} else {
+
+		$llim = ($numpage-1) * $nbitem;
+		$rlim =  $numpage * $nbitem;
+	}
+
 	?>
 	<script>
 		$(document).ready(function(){
@@ -51,7 +67,7 @@
 			<table class="table table-hover table-bordered">
 				<thead class="thead-dark">
 				<tr>
-					<th scope="col">Question</th>
+					<th scope="col">Nom du quizz</th>
 					<th scope="col">Clé</th>
 					<th scope="col" colspan="2">Action</th>
 					<th scope="col" >Statut</th>
@@ -61,9 +77,14 @@
 				<tbody>
 				<?php
 
-
 				if (isset($Nom)) {
-					for ($i = 0; $i < sizeof($Nom); $i++) {
+
+					$total=sizeof($Nom);
+
+					if($rlim>$total){
+						$rlim=$total;
+					}
+					for ($i = $llim; $i < $rlim; $i++) {
 						echo "<tr>";
 						echo "<th scope=\"row\">$Nom[$i] </th>";
 						echo "<th scope=\"row\">";
@@ -71,14 +92,13 @@
 						echo form_close();
 						echo "</th>";
 						echo "<th scope=\"row\">";
-
 						if(!($statut[$i]=='Expiré'||$statut[$i]=='Actif')) {
 							echo form_open("./MenuPrincipal/modifyQuizz/" . $clé[$i]);
 							echo form_submit('ModifyQuizz' . $clé[$i], 'Modifier ce quizz', array('class' => 'btn btn-warning'));
 							echo form_close();
 						}else{
 							echo form_button('Useless','Modifier ce quizz',array('class'=>'btn btn-warning',
-																							  'disabled'=>'disabled'));
+									'disabled'=>'disabled'));
 						}
 						echo "</th>";
 						echo "<th scope=\"row\">";
@@ -96,10 +116,53 @@
 						 </tr>";
 				}
 
+				$prev = $numpage - 1;
+				$next = $numpage + 1;
 				?>
 				</tbody>
 			</table>
 		</div>
+		<nav aria-label="...">
+			<ul class="pagination">
+				<?php if($numpage==1){
+					echo"<li class=\"page-item disabled\">
+					<span class=\"page-link\">Précedent</span>
+				</li>";
+				}else{
+					echo "<li class=\"page-item\">
+						 	 <a class=\"page-link\" href=\"?numpage=$prev\">Précedent</a>
+						</li>";
+				}
+				?>
+
+			<?php
+				$nbpages = ceil($total / $nbitem);
+
+				for ($i = 1; $i <= $nbpages; $i++) {
+				if ($i == $numpage) {
+					echo "<li class=\"page-item active\" aria-current=\"page\">
+      					<span class=\"page-link\">
+								$i
+      					 <span class=\"sr-only\">(current)</span>
+      						</span>
+					</li>";
+				} else {
+					echo "<li class=\"page-item\"><a class=\"page-link\" href=\"?numpage=$i\">$i</a></li>";
+				}
+			}
+				?>
+				<?php if($numpage==$nbpages){
+					echo"<li class=\"page-item disabled\">
+					<span class=\"page-link\">Suivant</span>
+				</li>";
+				}else{
+					echo "<li class=\"page-item\">
+						 	 <a class=\"page-link\" href=\"?numpage=$next\">Suivant</a>
+						</li>";
+				}
+				?>
+			</ul>
+		</nav>
 	</div>
 	<div class="tab-pane fade show active" id="actif" role="tabpanel" aria-labelledby="actif-tab">
 		<div class="table-responsive">
@@ -107,7 +170,7 @@
 			<table class="table table-hover table-bordered">
 				<thead class="thead-dark">
 				<tr>
-					<th scope="col">Question</th>
+					<th scope="col">Nom du quizz</th>
 					<th scope="col">Clé</th>
 					<th scope="col" colspan="3">Action</th>
 
@@ -158,6 +221,7 @@
 				</tbody>
 			</table>
 		</div>
+
 	</div>
 	<div class="tab-pane fade" id="préparation" role="tabpanel" aria-labelledby="préparation-tab">
 		<div class="table-responsive">
@@ -165,7 +229,7 @@
 			<table class="table table-hover table-bordered">
 				<thead class="thead-dark">
 				<tr>
-					<th scope="col">Question</th>
+					<th scope="col">Nom du quizz</th>
 					<th scope="col">Clé</th>
 					<th scope="col" colspan="6">Action</th>
 
@@ -232,6 +296,7 @@
 				</tbody>
 			</table>
 		</div>
+
 	</div>
 	<div class="tab-pane fade" id="expiré" role="tabpanel" aria-labelledby="expiré-tab">
 		<div class="table-responsive">
@@ -239,7 +304,7 @@
 			<table class="table table-hover table-bordered">
 				<thead class="thead-dark">
 				<tr>
-					<th scope="col" >Question</th>
+					<th scope="col" >Nom du quizz</th>
 					<th scope="col">Clé</th>
 					<th scope="col" colspan="3">Action</th>
 
