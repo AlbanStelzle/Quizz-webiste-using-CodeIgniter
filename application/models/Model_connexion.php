@@ -13,6 +13,13 @@ class model_connexion extends CI_Model
 
 		}
 		return $row;
+
+	}
+	public function getCount($email){
+		$this->db->where('email',$email);
+		$this->db->from('user');
+		$count= $this->db->count_all_results();
+		return $count;
 	}
 	public function check($data)
 	{

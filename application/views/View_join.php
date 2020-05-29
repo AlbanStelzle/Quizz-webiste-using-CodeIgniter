@@ -9,7 +9,7 @@ $data_clé = array(
 ?>
 
 <body class="text-center">
-	<?php  echo form_open('Quizz/joinQuizz',array('class'=>'form-signin'));
+	<?php  echo form_open('Quizz/joinQuizz/',array('class'=>'form-signin'));
 	echo"<h1 class=\" h3 mb-3 font-weight-normal\">Quizz</h1>";
 
 	echo form_input($data_clé);

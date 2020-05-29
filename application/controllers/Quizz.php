@@ -11,7 +11,8 @@ class Quizz extends CI_Controller
 
 	public function joinQuizz(){
 		$this->load->model('Model_quizz');
-		$key=$this->input->post('clé');
+		$key=trim($this->input->post('clé'));
+
 		$data=$this->Model_quizz->getAllQuizzDataByKey($key);
 		$this->load->view('template/View_template');
 
