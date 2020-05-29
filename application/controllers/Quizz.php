@@ -24,8 +24,6 @@ class Quizz extends CI_Controller
 			$this->load->view('template/View_template_center');
 			$this->load->view('errors/View_join_error');
 		}
-
-
 		}
 
 	public function is_active($key){
