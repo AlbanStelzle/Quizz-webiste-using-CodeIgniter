@@ -73,12 +73,14 @@ for($i=0, $y=$idQuestion[0] ; $i< sizeof($Nom); $i++,$y++) {
 		}
 		if (intval(strlen($BonneRéponse[$i])) === 1) {
 
-			if ($reponse3[$i] == null) {
+			if ($reponse3[$i] == null && $reponse4[$i] == null) {
 				echo form_dropdown("réponseéleve".$y,$data_dropdown,'',array('class'=>"form-control form-control-lg w-50 mx-auto"));
 			}
-			if ($reponse4[$i] == null) {
+			if ( $reponse3[$i] != null && $reponse4[$i] == null) {
+
 				echo form_dropdown("réponseéleve".$y,$data_dropdown2,'',array('class'=>"form-control form-control-lg w-50 mx-auto"));
-			}else{
+			}
+			if($reponse3[$i] != null && $reponse4[$i] == null){
 				echo form_dropdown("réponseéleve".$y,$data_dropdown3,'',array('class'=>"form-control form-control-lg w-50 mx-auto"));
 
 			}

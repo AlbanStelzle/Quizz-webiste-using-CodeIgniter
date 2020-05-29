@@ -62,13 +62,13 @@ class Quizz extends CI_Controller
 				'clédurésultat'=>$cléeleve
 			);
 			$this->Model_quizz_eleve->addReponseByEleve($data);
-
 			$i++;
 
 
 		}
 
-
+		$this->load->view('template/View_template');
+		$this->load->view('View_quizz_finished',array('clé'=>$cléeleve));
 		}
 
 
