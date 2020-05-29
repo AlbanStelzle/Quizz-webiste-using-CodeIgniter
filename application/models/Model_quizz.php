@@ -144,10 +144,14 @@ class model_quizz extends CI_Model
 		$this->db->where('clé', $key);
 		$query = $this->db->get('Quizz');
 		$row = $query->row();
-		if ($row->statut === "Actif") {
-			return True;
+		if($row !== null) {
+			if ($row->statut === "Actif") {
+				return True;
+			} else {
+				return False;
+			}
 		}else{
-			return False;
+			return false;
 		}
 	}
 }
