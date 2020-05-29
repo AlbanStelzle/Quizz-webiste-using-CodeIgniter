@@ -8,6 +8,7 @@ class model_quizz extends CI_Model
 		$this->load->helper('string');
 
 	}
+
 	public function getAllQuizzNameAndKey($id)
 	{
 		$this->db->where('id', $id);
@@ -27,102 +28,127 @@ class model_quizz extends CI_Model
 			return $data;
 		}
 	}
-	public function getAllQuizzDataByKeyAndId($key,$id){
-		$this->db->where('clé',$key);
-		$this->db->where('id',$id);
-		if($id === null){
+
+	public function getAllQuizzDataByKeyAndId($key, $id)
+	{
+		$this->db->where('clé', $key);
+		$this->db->where('id', $id);
+		if ($id === null) {
 			return false;
 		}
-		$query=$this->db->get('Quizz');
-		$result=$query->result_array();
-		$i=0;
-		foreach ($result as $row)
-		{
-			foreach($row as $key2=>$value){
-				$data[$key2][$i]=$value;
-			}
-		$i++;
-
-		}
-		return $data;
-	}
-	public function getAllQuizzDataByKey($key){
-		$this->db->where('clé',$key);
-		$query=$this->db->get('Quizz');
-		$result=$query->result_array();
-		$i=0;
-		foreach ($result as $row)
-		{
-			foreach($row as $key2=>$value){
-				$data[$key2][$i]=$value;
+		$query = $this->db->get('Quizz');
+		$result = $query->result_array();
+		$i = 0;
+		foreach ($result as $row) {
+			foreach ($row as $key2 => $value) {
+				$data[$key2][$i] = $value;
 			}
 			$i++;
 
 		}
 		return $data;
 	}
-	public function createKey(){
-		$key = random_string('numeric', 12);
-		$this->db->where('clé',$key);
+
+	public function getAllQuizzDataByKey($key)
+	{
+		$this->db->where('clé', $key);
 		$query = $this->db->get('Quizz');
-		if($arg=$query->num_rows() > 0) {
+		$result = $query->result_array();
+		$i = 0;
+		foreach ($result as $row) {
+			foreach ($row as $key2 => $value) {
+				$data[$key2][$i] = $value;
+			}
+			$i++;
+
+		}
+		return $data;
+	}
+
+	public function createKey()
+	{
+		$key = random_string('numeric', 12);
+		$this->db->where('clé', $key);
+		$query = $this->db->get('Quizz');
+		if ($arg = $query->num_rows() > 0) {
 			$this->createKey();
-		}else {
+		} else {
 			return $key;
 		}
 	}
-	public function addQuizzByTitle($title,$key){
+
+	public function addQuizzByTitle($title, $key)
+	{
 
 		$data = array(
-			'id'=> $this->session->id,
-			'question'=>null,
-			'Nom'=> trim($title),
-			'clé'=>$key,
-			'statut'=>'En préparation'
+			'id' => $this->session->id,
+			'question' => null,
+			'Nom' => trim($title),
+			'clé' => $key,
+			'statut' => 'En préparation'
 		);
-	$this->db->insert('Quizz',$data);
-	return $data;
+		$this->db->insert('Quizz', $data);
+		return $data;
 	}
-	public function getNameByKey($key){
+
+	public function getNameByKey($key)
+	{
 		$this->db->where('clé', $key);
 		$this->db->select('Nom');
-		$query=$this->db->get('Quizz');
-		foreach ($query->result() as $row)
-		{
+		$query = $this->db->get('Quizz');
+		foreach ($query->result() as $row) {
 		}
 		return $row->Nom;
 
 	}
-	public function deleteQuizzByKey($key){
-		$this->db->where('clé',$key);
+
+	public function deleteQuizzByKey($key)
+	{
+		$this->db->where('clé', $key);
 		$this->db->delete('Quizz');
 
 	}
 
-	public function addQuestionToQuizz($data){
+	public function addQuestionToQuizz($data)
+	{
 
-			$this->db->insert('Quizz', $data);
-
+		$this->db->insert('Quizz', $data);
 
 
 	}
-	public function delQuestionById($id){
-		$this->db->where('idQuestion',$id);
+
+	public function delQuestionById($id)
+	{
+		$this->db->where('idQuestion', $id);
 		$this->db->delete('Quizz');
 	}
 
-	public function ActiveQuizzByKey($key){
+	public function ActiveQuizzByKey($key)
+	{
 
 		$data = array('statut' => 'Actif');
-		$this->db->where('clé',$key);
-		$this->db->update('Quizz',$data);
+		$this->db->where('clé', $key);
+		$this->db->update('Quizz', $data);
 	}
 
-	public function ExpiredQuizzByKey($key){
+	public function ExpiredQuizzByKey($key)
+	{
 		$data = array('statut' => 'Expiré');
-		$this->db->where('clé',$key);
-		$this->db->update('Quizz',$data);
+		$this->db->where('clé', $key);
+		$this->db->update('Quizz', $data);
 	}
 
+	public function isQuizzActive($key)
+	{
+		$this->db->select('statut');
+		$this->db->where('clé', $key);
+		$query = $this->db->get('Quizz');
+		$row = $query->row();
+		if ($row->statut === "Actif") {
+			return True;
+		}else{
+			return False;
+		}
+	}
 }
 

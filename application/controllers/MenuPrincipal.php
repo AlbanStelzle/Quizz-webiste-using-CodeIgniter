@@ -7,6 +7,10 @@ class MenuPrincipal extends CI_Controller
 		$this->load->library('session');
 		$this->load->library('form_validation');
 		$this->load->helper('url');
+		if(!isset($this->session->id)) {
+			redirect('Accueil');
+		}
+
 	}
 
 	public function index()

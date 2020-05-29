@@ -9,16 +9,29 @@ class Quizz extends CI_Controller
 		$this->load->library('form_validation');
 	}
 
-	public function joinQuizz(){
+	public function joinQuizz()
+	{
 		$this->load->model('Model_quizz');
-		$key=trim($this->input->post('clé'));
+		$this->form_validation->set_rules('clé', 'clé', 'callback_is_active');
+		$this->form_validation->set_message('is_active', '{field} est une clé incorrecte ou n\'est pas active.');
+		if ($this->form_validation->run()) {
+			$key = trim($this->input->post('clé'));
+			$data = $this->Model_quizz->getAllQuizzDataByKey($key);
+			$this->load->view('template/View_template');
+			$this->load->view('View_fillQuizz', $data);
+		} else {
+			$this->load->view('template/View_template');
+			$this->load->view('template/View_template_center');
+			$this->load->view('View_join');
+		}
 
-		$data=$this->Model_quizz->getAllQuizzDataByKey($key);
-		$this->load->view('template/View_template');
 
-		$this->load->view('View_fillQuizz',$data);
+		}
+
+	public function is_active($key){
+		$this->load->model('Model_quizz');
+		return $this->Model_quizz->isQuizzActive($key);
 	}
-
 }
 
 ?>
