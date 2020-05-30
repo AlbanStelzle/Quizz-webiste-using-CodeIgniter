@@ -36,6 +36,10 @@ class Quizz extends CI_Controller
 		$this->load->model('Model_quizz');
 		return $this->Model_quizz->isQuizzActive($key);
 	}
+	public function is_expired($key){
+		$this->load->model('Model_quizz');
+		return $this->Model_quizz->isQuizzExpired($key);
+	}
 
 	public function is_active_eleve($key){
 		$this->load->model('Model_quizz_eleve');
@@ -77,8 +81,9 @@ class Quizz extends CI_Controller
 	}
 
 	public function resultPage(){
-		$this->form_validation->set_rules('clédurésultat', 'clé', 'required|callback_is_active_eleve');
+		$this->form_validation->set_rules('clédurésultat', 'clé', 'required|callback_is_active_eleve|callback_is_expired');
 		$this->form_validation->set_message('is_active_eleve', 'La {field} n\'existe pas dans la base.');
+		$this->form_validation->set_message('is_expired', 'La {field} n\'est pas encore prête pour accéder aux résultats.');
 
 		if ($this->form_validation->run()) {
 			$cléeleve=$this->input->post('clédurésultat');

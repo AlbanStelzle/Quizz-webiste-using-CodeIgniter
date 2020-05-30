@@ -13,8 +13,14 @@
 		<thead class="thead-dark">
 		<tr>
 			<th scope="col">Question</th>
+			<th scope="col">Réponse1</th>
+			<th scope="col">Réponse2</th>
+			<th scope="col">Réponse3</th>
+			<th scope="col">Réponse4</th>
 			<th scope="col">Vos réponses</th>
 			<th scope="col">Bonnes réponses</th>
+			<th scope="col" style="width:90px">Réussi ?</th>
+
 		</tr>
 		</thead>
 		<tbody>
@@ -30,6 +36,22 @@ $scoretotal=0;
 				echo "</th>";
 
 				echo "<th scope=\"row\">";
+				echo $dataquizz['reponse1'][$i];
+				echo "</th>";
+
+				echo "<th scope=\"row\">";
+				echo $dataquizz['reponse2'][$i];
+				echo "</th>";
+
+				echo "<th scope=\"row\">";
+				echo $dataquizz['reponse3'][$i];
+				echo "</th>";
+
+				echo "<th scope=\"row\">";
+				echo $dataquizz['reponse4'][$i];
+				echo "</th>";
+
+				echo "<th scope=\"row\">";
 				echo $dataResultQuizz['réponseséleve'][$i];
 				echo "</th>";
 
@@ -39,17 +61,29 @@ $scoretotal=0;
 
 				if(strcmp($dataResultQuizz['réponseséleve'][$i],$dataquizz['BonneRéponse'][$i])==0){
 					$scoretotal++;
+					$RepColor="bg-success";
+					echo "<th scope=\"row \" class=\"$RepColor\">";
+					echo "</th>";
+				}else{
+					$RepColor="bg-danger";
+					echo $RepColor;
+					echo "<th scope=\"row \" class=\"$RepColor\">";
+					echo "</th>";
 				}
-
+;
 			echo "</tr>";
 		}
+			$nbTotalQuest= sizeof($dataResultQuizz['idQuestion']);
+			echo "<th>";
+		echo "<span class=\"border\">Votre résultat: $scoretotal / $nbTotalQuest  </span>";
+			echo "</th>";
 
 		echo "</tbody>";
 		echo "</table>";
-		echo $scoretotal;
 
-		echo anchor('MenuPrincipal/quizzHub', 'Retour à la liste de vos quizz');
+		echo anchor('MenuPrincipal/quizzHub', 'Retour à l\'accueil');
 		?>
+
 </div>
 </body>
 </html>

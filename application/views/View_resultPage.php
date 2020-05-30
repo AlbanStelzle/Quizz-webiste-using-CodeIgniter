@@ -14,7 +14,7 @@ $data_clé = array(
 
 ?>
 
-<body>
+<body class="text-center">
 <div class="container ">
 	<h1 class="text-center display-1" style="font-size: 3.6rem">Voir ses résultats</h1>
 
@@ -28,7 +28,10 @@ $data_clé = array(
 	echo "<br>";
 	echo form_submit('SendDataEleve','Accéder aux résultats',array('class'=>'btn btn-lg btn-primary btn-block'));
 	echo form_close();
+	echo anchor('Accueil/join','Retour');
+
 ?>
+
 		</div>
 </div>
 </div>

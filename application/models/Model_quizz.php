@@ -155,5 +155,23 @@ class model_quizz extends CI_Model
 			return false;
 		}
 	}
+	public function isQuizzExpired($key)
+	{
+		$this->db->select('statut');
+		$this->db->where('clédurésultat', $key);
+		$this->db->from('ResultQuizz');
+		$this->db->join('Quizz', 'Quizz.clé = ResultQuizz.cléduquizz');
+		$query = $this->db->get();
+		$row = $query->row();
+		if($row !== null) {
+			if ($row->statut === "Expiré") {
+				return True;
+			} else {
+				return False;
+			}
+		}else{
+			return false;
+		}
+	}
 }
 
