@@ -7,10 +7,11 @@ $this->load->helper('form');
 
 echo "<h1 class=\"h1 display-1 \">$Nom[0]</h1>";
 echo form_open('Quizz/finishQuizz/'.$clé[0]);
-for($i=0, $y=$idQuestion[0] ; $i< sizeof($Nom); $i++,$y++) {
+for($i=1  ; $i< sizeof($Nom); $i++) {
+	echo $idQuestion[$i];
 	$data_checkbox1 = array(
 			'type' => 'checkbox',
-			'name' => "réponseéleve$y"."[]",
+			'name' => "réponseéleve$idQuestion[$i]"."[]",
 			'class' => 'form-check-input mx-auto',
 			'id' => 'inlineCheckbox1',
 			'value'=>'1'
@@ -18,7 +19,7 @@ for($i=0, $y=$idQuestion[0] ; $i< sizeof($Nom); $i++,$y++) {
 	);
 	$data_checkbox2 = array(
 			'type' => 'checkbox',
-			'name' => "réponseéleve$y"."[]",
+			'name' => "réponseéleve$idQuestion[$i]"."[]",
 			'class' => 'form-check-input mx-auto',
 			'id' => 'inlineCheckbox2',
 			'value'=>'2'
@@ -26,7 +27,7 @@ for($i=0, $y=$idQuestion[0] ; $i< sizeof($Nom); $i++,$y++) {
 	);
 	$data_checkbox3 = array(
 			'type' => 'checkbox',
-			'name' => "réponseéleve$y"."[]",
+			'name' => "réponseéleve$idQuestion[$i]"."[]",
 			'class' => 'form-check-input mx-auto',
 			'id' => 'inlineCheckbox3',
 			'value'=>'3'
@@ -34,7 +35,7 @@ for($i=0, $y=$idQuestion[0] ; $i< sizeof($Nom); $i++,$y++) {
 	);
 	$data_checkbox4 = array(
 			'type' => 'checkbox',
-			'name' => "réponseéleve$y"."[]",
+			'name' => "réponseéleve$idQuestion[$i]"."[]",
 			'class' => 'form-check-input mx-auto',
 			'id' => 'inlineCheckbox4',
 			'value'=>'4'
@@ -74,15 +75,11 @@ for($i=0, $y=$idQuestion[0] ; $i< sizeof($Nom); $i++,$y++) {
 		if (intval(strlen($BonneRéponse[$i])) === 1) {
 
 			if ($reponse3[$i] == null && $reponse4[$i] == null) {
-				echo form_dropdown("réponseéleve".$y,$data_dropdown,'',array('class'=>"form-control form-control-lg w-50 mx-auto"));
-			}
-			if ( $reponse3[$i] != null && $reponse4[$i] == null) {
-
-				echo form_dropdown("réponseéleve".$y,$data_dropdown2,'',array('class'=>"form-control form-control-lg w-50 mx-auto"));
-			}
-			if($reponse3[$i] != null && $reponse4[$i] == null){
-				echo form_dropdown("réponseéleve".$y,$data_dropdown3,'',array('class'=>"form-control form-control-lg w-50 mx-auto"));
-
+				echo form_dropdown("réponseéleve".$idQuestion[$i],$data_dropdown,'',array('class'=>"form-control form-control-lg w-50 mx-auto"));
+			}elseif ( $reponse3[$i] != null && $reponse4[$i] == null) {
+				echo form_dropdown("réponseéleve".$idQuestion[$i],$data_dropdown2,'',array('class'=>"form-control form-control-lg w-50 mx-auto"));
+			}elseif($reponse3[$i] != null && $reponse4[$i] == null){
+				echo form_dropdown("réponseéleve".$idQuestion[$i],$data_dropdown3,'',array('class'=>"form-control form-control-lg w-50 mx-auto"));
 			}
 			echo "<br>";
 		} else {
@@ -126,6 +123,7 @@ echo" <div class='mx-auto '>";
 	echo"</div>";
 			echo"</div>";
 			?>
+
 	</div>
 
 </body>

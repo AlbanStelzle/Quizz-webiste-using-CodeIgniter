@@ -3,7 +3,7 @@
 		<h1 class="display-4">Fin du quizz !</h1>
 		<p class="lead">Tes réponses ont été envoyé ! Garde le code qui t'est fournit, il te servira de clé pour accéder à la correction !</p>
 		<hr class="my-4">
-		<p>Voici ta clé: <?php echo $clé ?>. Elle est unique et personnelle </p>
+		<p>Voici ta clé: <?php echo $clédurésultat ?>. Elle est unique et personnelle </p>
 		<?php echo anchor('Accueil','Retour à l\'accueil',array('class'=>'btn btn-primary btn-lg')); ?>
 	</div>
 </div>

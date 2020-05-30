@@ -36,40 +36,68 @@ class Quizz extends CI_Controller
 		$this->load->model('Model_quizz');
 		return $this->Model_quizz->isQuizzActive($key);
 	}
+
+	public function is_active_eleve($key){
+		$this->load->model('Model_quizz_eleve');
+		return $this->Model_quizz_eleve->isResultActive($key);
+	}
 	public function finishQuizz($key){
 		$this->load->model('Model_quizz_eleve');
 		$this->load->model('Model_quizz');
 		$dataQuizz = $this->Model_quizz->getAllQuizzDataByKey($key);
 		$i=0;
 		$cléeleve=$this->Model_quizz_eleve->createKey();
-
 		foreach($dataQuizz['idQuestion'] as $numQuestion) {
+			if ($this->input->post('réponseéleve' . $numQuestion) != null) {
+				if (is_array($this->input->post('réponseéleve' . $numQuestion))) {
+					$data[$i] = implode(',', $this->input->post('réponseéleve' . $numQuestion));
+				} else {
+					$data[$i] = $this->input->post('réponseéleve' . $numQuestion);
 
-		if(is_array($this->input->post('réponseéleve'.$numQuestion))){
-			$data[$i]=implode(',',$this->input->post('réponseéleve'.$numQuestion));
+				}
 
-		}else {
-			$data[$i] = $this->input->post('réponseéleve' . $numQuestion);
+				$dataall = array(
+					'noméleve' => $this->session->nom,
+					'prenoméleve' => $this->session->prenom,
+					'cléduquizz' => $key,
+					'idQuestion' => $numQuestion,
+					'réponseséleve' => $data[$i],
+					'clédurésultat' => $cléeleve
+				);
+				$this->Model_quizz_eleve->addReponseByEleve($dataall);
 
+				$i++;
+
+
+			}
 		}
-
-			$data = array(
-				'noméleve' => $this->session->nom,
-				'prenoméleve' => $this->session->prenom,
-				'cléduquizz' => $key,
-				'idQuestion' => $numQuestion,
-				'réponseséleve' => 'En préparation',
-				'clédurésultat'=>$cléeleve
-			);
-			$this->Model_quizz_eleve->addReponseByEleve($data);
-			$i++;
-
-
-		}
-
 		$this->load->view('template/View_template');
-		$this->load->view('View_quizz_finished',array('clé'=>$cléeleve));
+
+		$this->load->view('View_quizz_finished', $dataall);
+	}
+
+	public function resultPage(){
+		$this->form_validation->set_rules('clédurésultat', 'clé', 'required|callback_is_active_eleve');
+		$this->form_validation->set_message('is_active_eleve', 'La {field} n\'existe pas dans la base.');
+
+		if ($this->form_validation->run()) {
+			$cléeleve=$this->input->post('clédurésultat');
+			$this->load->model('Model_quizz');
+			$this->load->model('Model_quizz_eleve');
+			$cléquizz=$this->Model_quizz_eleve->getQuizzKeyByEleveKey($cléeleve);
+			$dataquizz=$this->Model_quizz->getAllQuizzDataByKey($cléquizz);
+			$dataResultQuizz= $this->Model_quizz_eleve->getAllReponseQuizzEleveByKey(($cléeleve));
+
+			$this->load->view('template/View_template');
+			$data['dataquizz']=$dataquizz;
+			$data['dataResultQuizz']=$dataResultQuizz;
+			$this->load->view('View_result_eleve',$data);
+			//print_r($data['dataquizz']['Nom']);
+		} else {
+			$this->load->view('template/View_template');
+			$this->load->view('View_resultPage');
 		}
+	}
 
 
 

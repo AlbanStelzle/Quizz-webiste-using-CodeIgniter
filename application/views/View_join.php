@@ -39,9 +39,8 @@ $data_nom = array(
 
 	echo form_submit('launchQuizz','Lancer le quizz',array('class'=>'btn btn-lg btn-primary btn-block'));
 	echo anchor('Accueil/','Retour à l\'accueil.');
+	echo anchor('Quizz/resultPage/','Voir ses résultats.');
 	echo form_close();
-
-
 
 ?>
 </body>
