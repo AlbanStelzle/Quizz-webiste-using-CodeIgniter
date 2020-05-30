@@ -20,7 +20,7 @@
 		<tbody>
 		<?php
 
-
+$scoretotal=0;
 		for ($i = 0; $i < sizeof($dataResultQuizz['idQuestion']); $i++) {
 
 				echo "<tr>";
@@ -37,14 +37,17 @@
 				echo $dataquizz['BonneRéponse'][$i];
 				echo "</th>";
 
-
+				if(strcmp($dataResultQuizz['réponseséleve'][$i],$dataquizz['BonneRéponse'][$i])==0){
+					$scoretotal++;
+				}
 
 			echo "</tr>";
 		}
 
-
 		echo "</tbody>";
 		echo "</table>";
+		echo $scoretotal;
+
 		echo anchor('MenuPrincipal/quizzHub', 'Retour à la liste de vos quizz');
 		?>
 </div>

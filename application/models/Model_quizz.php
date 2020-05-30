@@ -58,14 +58,10 @@ class model_quizz extends CI_Model
 		$i =0;
 		foreach ($result as $row) {
 			foreach ($row as $key2 => $value) {
-					$data[$key2][$i] = $value;
-					echo $value . " ";
+				$data[$key2][$i] = $value;
 
 			}
-			//echo print_r($data);
-
 			$i++;
-
 		}
 		return $data;
 	}

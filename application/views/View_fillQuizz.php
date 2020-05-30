@@ -7,7 +7,7 @@ $this->load->helper('form');
 
 echo "<h1 class=\"h1 display-1 \">$Nom[0]</h1>";
 echo form_open('Quizz/finishQuizz/'.$clé[0]);
-for($i=1  ; $i< sizeof($Nom); $i++) {
+for($i=0  ; $i< sizeof($Nom); $i++) {
 	echo $idQuestion[$i];
 	$data_checkbox1 = array(
 			'type' => 'checkbox',

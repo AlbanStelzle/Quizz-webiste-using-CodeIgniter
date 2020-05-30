@@ -59,7 +59,6 @@ class Model_quizz_eleve extends CI_Model
 
 				}
 				$i++;
-
 			}
 			return $data;
 
