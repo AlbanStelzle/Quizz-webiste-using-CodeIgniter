@@ -52,13 +52,18 @@ class model_quizz extends CI_Model
 	public function getAllQuizzDataByKey($key)
 	{
 		$this->db->where('clé', $key);
+		$this->db->where('question!=', null);
 		$query = $this->db->get('Quizz');
 		$result = $query->result_array();
-		$i = 0;
+		$i =0;
 		foreach ($result as $row) {
 			foreach ($row as $key2 => $value) {
-				$data[$key2][$i] = $value;
+					$data[$key2][$i] = $value;
+					echo $value . " ";
+
 			}
+			//echo print_r($data);
+
 			$i++;
 
 		}

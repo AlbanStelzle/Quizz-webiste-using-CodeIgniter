@@ -56,6 +56,7 @@ class Model_quizz_eleve extends CI_Model
 			foreach ($result as $row) {
 				foreach ($row as $key2 => $value) {
 					$data[$key2][$i] = $value;
+
 				}
 				$i++;
 

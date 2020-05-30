@@ -86,13 +86,12 @@ class Quizz extends CI_Controller
 			$this->load->model('Model_quizz_eleve');
 			$cléquizz=$this->Model_quizz_eleve->getQuizzKeyByEleveKey($cléeleve);
 			$dataquizz=$this->Model_quizz->getAllQuizzDataByKey($cléquizz);
-			$dataResultQuizz= $this->Model_quizz_eleve->getAllReponseQuizzEleveByKey(($cléeleve));
+			$dataResultQuizz= $this->Model_quizz_eleve->getAllReponseQuizzEleveByKey($cléeleve);
 
 			$this->load->view('template/View_template');
 			$data['dataquizz']=$dataquizz;
 			$data['dataResultQuizz']=$dataResultQuizz;
 			$this->load->view('View_result_eleve',$data);
-			//print_r($data['dataquizz']['Nom']);
 		} else {
 			$this->load->view('template/View_template');
 			$this->load->view('View_resultPage');

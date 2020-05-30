@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title><?php echo $Nom[0] ?></title>
+<title><?php echo $dataquizz['Nom'][0] ?></title>
 
 <head>
 	<?php
@@ -8,7 +8,7 @@
 </head>
 
 <div class="table-responsive">
-	<h1><?php echo $Nom[0] ?></h1>
+	<h1><?php echo $dataquizz['Nom'][0] ?></h1>
 	<table class="table table-hover table-bordered">
 		<thead class="thead-dark">
 		<tr>
@@ -21,8 +21,7 @@
 		<?php
 
 
-		for ($i = 0; $i < sizeof($Nom); $i++) {
-			if (isset($dataquizz['question'][$i])) {
+		for ($i = 0; $i < sizeof($dataResultQuizz['idQuestion']); $i++) {
 
 				echo "<tr>";
 
@@ -31,7 +30,7 @@
 				echo "</th>";
 
 				echo "<th scope=\"row\">";
-				echo $dataResultQuizz['réponseéleve'][$i];
+				echo $dataResultQuizz['réponseséleve'][$i];
 				echo "</th>";
 
 				echo "<th scope=\"row\">";
@@ -40,7 +39,6 @@
 
 
 
-			}
 			echo "</tr>";
 		}
 
