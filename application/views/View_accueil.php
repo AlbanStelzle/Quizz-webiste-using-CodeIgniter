@@ -1,5 +1,5 @@
 
-<div class="container" style="width: 500px;text-align: center;">
+<div class="container text-center" style="width: 400px">
 
 	<?php
 
@@ -8,7 +8,7 @@
 
 	echo "<br>";
 
-	echo anchor('Accueil/connection','Je suis enseignant',array('class'=>'btn btn-lg btn-block btn-outline-primary','style'=>'width:100%'));
+	echo anchor('Accueil/login ','Je suis enseignant',array('class'=>'btn btn-lg btn-block btn-outline-primary','style'=>'width:100%'));
 	echo "<br>";
 	echo anchor('Accueil/join','Je suis étudiant',array('class'=>'btn btn-lg btn-block btn-outline-primary','style'=>'width:100%'));
 
