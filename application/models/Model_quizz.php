@@ -173,5 +173,12 @@ class model_quizz extends CI_Model
 			return false;
 		}
 	}
+	public function CopyQuizzByKey($key){
+		$data=$this->getAllQuizzDataByKey($key);
+		$newKey=$this->createKey();
+		$data['clé']=$newKey;
+		$data['statut']='En préparation';
+		$this->db->insert('Quizz', $data);
+	}
 }
 

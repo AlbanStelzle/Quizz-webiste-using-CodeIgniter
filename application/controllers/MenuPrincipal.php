@@ -121,6 +121,12 @@ class MenuPrincipal extends CI_Controller
 		$this->Model_quizz->ExpiredQuizzByKey($key);
 		redirect('MenuPrincipal/quizzHub','refresh');
 	}
+	public function CopyQuizz($key){
+		$this->load->model('Model_quizz');
+		$this->Model_quizz->CopyQuizzByKey($key);
+		redirect('MenuPrincipal/quizzHub','refresh');
+
+	}
 
 }
 ?>

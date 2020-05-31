@@ -69,7 +69,7 @@
 				<tr>
 					<th scope="col">Nom du quizz</th>
 					<th scope="col">Clé</th>
-					<th scope="col" colspan="2">Action</th>
+					<th scope="col" colspan="3">Action</th>
 					<th scope="col" >Statut</th>
 
 				</tr>
@@ -100,7 +100,15 @@
 							echo form_button('Useless','Modifier ce quizz',array('class'=>'btn btn-warning',
 									'disabled'=>'disabled'));
 						}
+
 						echo "</th>";
+
+						echo "<th scope=\"row\">";
+						echo form_open("./MenuPrincipal/CopyQuizz/" . $clé[$i]);
+						echo form_submit('CopyQuizz' . $clé[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
+						echo form_close();
+						echo "</th>";
+
 						echo "<th scope=\"row\">";
 						echo form_open("./MenuPrincipal/deleteQuizzByKey/" . $clé[$i]);
 						echo form_submit("DelQuizz['$i']", 'Supprimer ce quizz',array('class'=>'btn btn-danger'));
@@ -177,7 +185,7 @@
 				<tr>
 					<th scope="col">Nom du quizz</th>
 					<th scope="col">Clé</th>
-					<th scope="col" colspan="3">Action</th>
+					<th scope="col" colspan="4">Action</th>
 
 				</tr>
 				</thead>
@@ -199,7 +207,11 @@
 							echo form_submit('ModifyQuizz' . $clé[$i], 'Modifier ce quizz', array('class'=>'btn btn-warning',
 									'disabled'=>'disabled'));
 							echo form_close();
-
+							echo "<th scope=\"row\">";
+							echo form_open("./MenuPrincipal/CopyQuizz/" . $clé[$i]);
+							echo form_submit('CopyQuizz' . $clé[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
+							echo form_close();
+							echo "</th>";
 							echo "</th>";
 							echo "<th scope=\"row\">";
 							echo form_open("./MenuPrincipal/deleteQuizzByKey/" . $clé[$i]);
@@ -236,7 +248,7 @@
 				<tr>
 					<th scope="col">Nom du quizz</th>
 					<th scope="col">Clé</th>
-					<th scope="col" colspan="6">Action</th>
+					<th scope="col" colspan="4">Action</th>
 
 				</tr>
 				</thead>
@@ -258,7 +270,11 @@
 							echo form_open("./MenuPrincipal/modifyQuizz/" . $clé[$i]);
 							echo form_submit('ModifyQuizz' . $clé[$i], 'Modifier ce quizz', array('class' => 'btn btn-warning'));
 							echo form_close();
-
+							echo "<th scope=\"row\">";
+							echo form_open("./MenuPrincipal/CopyQuizz/" . $clé[$i]);
+							echo form_submit('CopyQuizz' . $clé[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
+							echo form_close();
+							echo "</th>";
 							echo "</th>";
 							echo "<th scope=\"row\">";
 							echo form_open("./MenuPrincipal/deleteQuizzByKey/" . $clé[$i]);
@@ -311,7 +327,7 @@
 				<tr>
 					<th scope="col" >Nom du quizz</th>
 					<th scope="col">Clé</th>
-					<th scope="col" colspan="3">Action</th>
+					<th scope="col" colspan="4">Action</th>
 
 				</tr>
 				</thead>
@@ -334,7 +350,11 @@
 							echo form_submit('ModifyQuizz' . $clé[$i], 'Modifier ce quizz', array('class'=>'btn btn-warning',
 									'disabled'=>'disabled'));
 							echo form_close();
-
+							echo "<th scope=\"row\">";
+							echo form_open("./MenuPrincipal/CopyQuizz/" . $clé[$i]);
+							echo form_submit('CopyQuizz' . $clé[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
+							echo form_close();
+							echo "</th>";
 							echo "</th>";
 							echo "<th scope=\"row\">";
 							echo form_open("./MenuPrincipal/deleteQuizzByKey/" . $clé[$i]);

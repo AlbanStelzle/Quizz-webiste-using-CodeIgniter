@@ -8,7 +8,6 @@ $this->load->helper('form');
 echo "<h1 class=\"h1 display-1 \">$Nom[0]</h1>";
 echo form_open('Quizz/finishQuizz/'.$clé[0]);
 for($i=0  ; $i< sizeof($Nom); $i++) {
-	echo $idQuestion[$i];
 	$data_checkbox1 = array(
 			'type' => 'checkbox',
 			'name' => "réponseéleve$idQuestion[$i]"."[]",
@@ -78,7 +77,7 @@ for($i=0  ; $i< sizeof($Nom); $i++) {
 				echo form_dropdown("réponseéleve".$idQuestion[$i],$data_dropdown,'',array('class'=>"form-control form-control-lg w-50 mx-auto"));
 			}elseif ( $reponse3[$i] != null && $reponse4[$i] == null) {
 				echo form_dropdown("réponseéleve".$idQuestion[$i],$data_dropdown2,'',array('class'=>"form-control form-control-lg w-50 mx-auto"));
-			}elseif($reponse3[$i] != null && $reponse4[$i] == null){
+			}else{
 				echo form_dropdown("réponseéleve".$idQuestion[$i],$data_dropdown3,'',array('class'=>"form-control form-control-lg w-50 mx-auto"));
 			}
 			echo "<br>";
