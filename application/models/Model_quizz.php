@@ -173,12 +173,22 @@ class model_quizz extends CI_Model
 			return false;
 		}
 	}
-	public function CopyQuizzByKey($key){
-		$data=$this->getAllQuizzDataByKey($key);
+	public function CopyQuizzByData($key){
 		$newKey=$this->createKey();
-		$data['clé']=$newKey;
-		$data['statut']='En préparation';
-		$this->db->insert('Quizz', $data);
+		$this->db->where('clé', $key);
+		$query = $this->db->get('Quizz');
+		$result = $query->result_array();
+		foreach ($result as $row) {
+			foreach ($row as $key2 => $value) {
+				$data[$key2] = $value;
+				$data['clé']=$newKey;
+				$data['idQuestion']=null;
+
+			}
+			$this->db->insert('Quizz',$data);
+
+		}
 	}
+
 }
 
