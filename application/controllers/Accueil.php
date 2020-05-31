@@ -28,54 +28,57 @@ class Accueil extends CI_Controller
 	}
 
 	public function login()
-	{
-		$this->load->helper('form');
-		$this->load->model('Model_connexion');
-		$this->form_validation->set_rules('Email', 'Email', 'valid_email|required|callback_validate_email');
-		$this->form_validation->set_rules('Pwd', 'Mot de passe', 'required|alpha_numeric');
-		$this->form_validation->set_message('validate_email', '{field} existe pas dans la base.');
 
-		if ($this->form_validation->run()) {
-			$email = $this->input->post('Email');
-			$password = $this->input->post('Pwd');
-			if ($this->Model_connexion->getCount($email)>0){
-				$datadb = $this->Model_connexion->getAll($email);
+	{$this->load->view('template/View_template');
+			$this->load->view('template/View_template_center');
+			$this->load->view('View_accueil');
+	// 	$this->load->helper('form');
+	// 	$this->load->model('Model_connexion');
+	// 	$this->form_validation->set_rules('Email', 'Email', 'valid_email|required|callback_validate_email');
+	// 	$this->form_validation->set_rules('Pwd', 'Mot de passe', 'required|alpha_numeric');
+	// 	$this->form_validation->set_message('validate_email', '{field} existe pas dans la base.');
 
-				if (password_verify($password, $datadb->password)) {
-					session_start();
-					$session_data = array(
-						'login' => $datadb->login,
-						'email' => $email,
-						'id' => $datadb->id
-					);
-					$this->session->set_userdata($session_data);
-					redirect(MenuPrincipal);
+	// 	if ($this->form_validation->run()) {
+	// 		$email = $this->input->post('Email');
+	// 		$password = $this->input->post('Pwd');
+	// 		if ($this->Model_connexion->getCount($email)>0){
+	// 			$datadb = $this->Model_connexion->getAll($email);
 
-				} else {
-					$this->load->view('template/View_template');
-					$this->load->view('template/View_template_center');
+	// 			if (password_verify($password, $datadb->password)) {
+	// 				session_start();
+	// 				$session_data = array(
+	// 					'login' => $datadb->login,
+	// 					'email' => $email,
+	// 					'id' => $datadb->id
+	// 				);
+	// 				$this->session->set_userdata($session_data);
+	// 				redirect(MenuPrincipal);
 
-					$this->load->view('errors/View_accueil_error');
-				}
-		}else{
+	// 			} else {
+	// 				$this->load->view('template/View_template');
+	// 				$this->load->view('template/View_template_center');
 
-				$this->load->view('template/View_template');
-				$this->load->view('template/View_template_center');
-				$this->load->view('errors/View_accueil_error');
-			}
-		} else {
-			if ($this->form_validation->error_array() == null) {
-				$this->load->view('template/View_template');
-				$this->load->view('template/View_template_center');
-				$this->load->view('View_accueil');
-			} else {
-				$this->load->view('template/View_template_center');
-				$this->load->view('template/View_template');
+	// 				$this->load->view('errors/View_accueil_error');
+	// 			}
+	// 	}else{
 
-				$this->load->view('errors/View_accueil_error');
+	// 			$this->load->view('template/View_template');
+	// 			$this->load->view('template/View_template_center');
+	// 			$this->load->view('errors/View_accueil_error');
+	// 		}
+	// 	} else {
+	// 		if ($this->form_validation->error_array() == null) {
+	// 			$this->load->view('template/View_template');
+	// 			$this->load->view('template/View_template_center');
+	// 			$this->load->view('View_accueil');
+	// 		} else {
+	// 			$this->load->view('template/View_template_center');
+	// 			$this->load->view('template/View_template');
 
-			}
-		}
+	// 			$this->load->view('errors/View_accueil_error');
+
+	// 		}
+	// 	}
 	}
 
 	public function register()
@@ -123,6 +126,61 @@ class Accueil extends CI_Controller
 			$this->load->view('template/View_template');
 			$this->load->view('template/View_template_center');
 			$this->load->view('View_join');
+
+		}
+		public function connection(){
+
+		$this->load->helper('form');
+		$this->load->model('Model_connexion');
+		$this->form_validation->set_rules('Email', 'Email', 'valid_email|required|callback_validate_email');
+		$this->form_validation->set_rules('Pwd', 'Mot de passe', 'required|alpha_numeric');
+		$this->form_validation->set_message('validate_email', '{field} existe pas dans la base.');
+
+		if ($this->form_validation->run()) {
+			$email = $this->input->post('Email');
+			$password = $this->input->post('Pwd');
+			if ($this->Model_connexion->getCount($email)>0){
+				$datadb = $this->Model_connexion->getAll($email);
+
+				if (password_verify($password, $datadb->password)) {
+					session_start();
+					$session_data = array(
+						'login' => $datadb->login,
+						'email' => $email,
+						'id' => $datadb->id
+					);
+					$this->session->set_userdata($session_data);
+					redirect(MenuPrincipal);
+
+				} else {
+					$this->load->view('template/View_template');
+					$this->load->view('template/View_template_center');
+
+					$this->load->view('errors/View_accueil_error');
+				}
+		}else{
+
+				$this->load->view('template/View_template');
+				$this->load->view('template/View_template_center');
+				$this->load->view('errors/View_accueil_error');
+			}
+		} else {
+			if ($this->form_validation->error_array() == null) {
+				$this->load->view('template/View_template');
+				$this->load->view('template/View_template_center');
+				$this->load->view('View_connection');
+			} else {
+				$this->load->view('template/View_template_center');
+				$this->load->view('template/View_template');
+
+				$this->load->view('errors/View_accueil_error');
+
+			}
+		}
+
+			// $this->load->view('template/View_template');
+			// $this->load->view('template/View_template_center');
+			// $this->load->view('View_connection');
 
 		}
 

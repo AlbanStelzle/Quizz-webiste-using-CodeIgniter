@@ -122,7 +122,9 @@
 				</tbody>
 			</table>
 		</div>
-		<nav aria-label="...">
+		<div class="nav justify-content-center">
+
+			<nav aria-label="...">
 			<ul class="pagination">
 				<?php if($numpage==1){
 					echo"<li class=\"page-item disabled\">
@@ -163,6 +165,9 @@
 				?>
 			</ul>
 		</nav>
+
+		</div>
+
 	</div>
 	<div class="tab-pane fade show active" id="actif" role="tabpanel" aria-labelledby="actif-tab">
 		<div class="table-responsive">
@@ -358,12 +363,14 @@
 		</div>
 	</div>
 </div>
+<div class="text-center">
+	<?php
 
-<?php
-
-		echo anchor('MenuPrincipal/','Retour au menu principal',array('class'=>'btn btn-primary'));
+		echo anchor('MenuPrincipal/','Retour au menu principal',array('class'=>'btn btn-outline-danger'));
 
 		?>
+	
+</div>
 	</div>
 
 </body>
