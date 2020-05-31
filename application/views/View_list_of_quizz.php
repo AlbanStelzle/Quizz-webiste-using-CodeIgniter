@@ -76,7 +76,7 @@
 				</thead>
 				<tbody>
 				<?php
-
+				$total=0;
 				if (isset($Nom)) {
 
 					$total=sizeof($Nom);
@@ -134,7 +134,9 @@
 
 			<nav aria-label="...">
 			<ul class="pagination">
-				<?php if($numpage==1){
+				<?php
+				if($total!=0) {
+					if($numpage==1){
 					echo"<li class=\"page-item disabled\">
 					<span class=\"page-link\">Précedent</span>
 				</li>";
@@ -148,27 +150,28 @@
 			<?php
 				$nbpages = ceil($total / $nbitem);
 
-				for ($i = 1; $i <= $nbpages; $i++) {
-				if ($i == $numpage) {
-					echo "<li class=\"page-item active\" aria-current=\"page\">
+					for ($i = 1; $i <= $nbpages; $i++) {
+						if ($i == $numpage) {
+							echo "<li class=\"page-item active\" aria-current=\"page\">
 						<span class=\"page-link\">
 								$i
 						 <span class=\"sr-only\">(current)</span>
 							</span>
 					</li>";
-				} else {
-					echo "<li class=\"page-item\"><a class=\"page-link\" href=\"?numpage=$i\">$i</a></li>";
-				}
-			}
-				?>
-				<?php if($numpage==$nbpages){
-					echo"<li class=\"page-item disabled\">
+						} else {
+							echo "<li class=\"page-item\"><a class=\"page-link\" href=\"?numpage=$i\">$i</a></li>";
+						}
+					}
+					?>
+					<?php if ($numpage == $nbpages) {
+						echo "<li class=\"page-item disabled\">
 					<span class=\"page-link\">Suivant</span>
 				</li>";
-				}else{
-					echo "<li class=\"page-item\">
+					} else {
+						echo "<li class=\"page-item\">
 							 <a class=\"page-link\" href=\"?numpage=$next\">Suivant</a>
 						</li>";
+					}
 				}
 				?>
 			</ul>
