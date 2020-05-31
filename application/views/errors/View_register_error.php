@@ -37,6 +37,13 @@ $data_pwd = array(
 	'placeholder' => 'Mot de passe',
 	'class' => 'form-control is-invalid',
 );
+$data_pwdv = array(
+		'type'  => 'password',
+		'name'  => 'Pwdv',
+		'id'    => 'Pwd',
+		'placeholder' => 'Confirmer votre mot de passe',
+		'class' => 'form-control is-invalid',
+);
 ?>
 <body class="text-center">
 <?php
@@ -54,8 +61,10 @@ echo "<br>";
 
 echo form_input($data_pwd);
 echo form_error('Pwd','<div class="invalid-feedback">','</div>');
+echo form_input($data_pwdv);
+echo form_error('Pwdv','<div class="invalid-feedback">','</div>');
 if(form_error('Pwd')==null){
-	echo"<div class=\"invalid-feedback\"> Veuillez retaper votre mot depasse. </div>";
+	echo"<div class=\"invalid-feedback\"> Veuillez retaper votre mot de passe. </div>";
 }
 
 echo "<br>";

@@ -4,6 +4,7 @@ class model_connexion extends CI_Model
 	public function __construct()
 	{
 		$this->load->database();
+		$this->load->helper('string');
 	}
 	public function getAll($email){
 		$this->db->where('email',$email);
@@ -35,9 +36,32 @@ class model_connexion extends CI_Model
 			return false;
 		}
 	}
-	public function register($data){
+	public function createKeyForUser()
+	{
+		$key = random_string('numeric', 12);
+		$this->db->where('clé', $key);
+		$query = $this->db->get('user_waiting');
+		if ($arg = $query->num_rows() > 0) {
+			$this->createKeyForUser();
+		} else {
+			return $key;
+		}
+	}
+	public function createNewUser($data){
+		$this->db->insert('user_waiting',$data);
+
+	}
+	public function ActivateAccount($key){
+		$this->db->where('clé', $key);
+		$this->db->select('login, email,password,id');
+		$query=$this->db->get('user_waiting');
+		foreach ($query->result() as $data)
+		{
+
+		}
 		$this->db->insert('user',$data);
 	}
+
 
 }
 

@@ -7,14 +7,16 @@ class Accueil extends CI_Controller
 		$this->load->library('session');
 		$this->load->helper('url');
 		$this->load->library('form_validation');
+		$this->load->library('email');
+
 	}
 
 	public function index()
 	{
 		$this->session->sess_destroy();
-		$this->accueil();
+		$this->homePage();
 	}
-	function accueil()
+	function homePage()
 	{
 		$this->load->view('template/View_template');
 		$this->load->view('template/View_template_center');
@@ -40,7 +42,7 @@ class Accueil extends CI_Controller
 	 	$this->load->helper('form');
 	 	$this->load->model('Model_connexion');
 	 	$this->form_validation->set_rules('Email', 'Email', 'valid_email|required|callback_validate_email');
-	 	$this->form_validation->set_rules('Pwd', 'Mot de passe', 'required|alpha_numeric');
+		$this->form_validation->set_rules('Pwd', 'Mot de passe', 'required|alpha_numeric');
 	 	$this->form_validation->set_message('validate_email', '{field} existe pas dans la base.');
 
 	 	if ($this->form_validation->run()) {
@@ -94,7 +96,9 @@ class Accueil extends CI_Controller
 
 		$this->form_validation->set_rules('Login', 'Login', 'required|alpha_numeric');
 		$this->form_validation->set_rules('Email', 'Email', 'valid_email|required|is_unique[user.email]');
-		$this->form_validation->set_rules('Pwd', 'Pwd', 'required|alpha_numeric');
+		$this->form_validation->set_rules('Pwd', 'Mot de passe', 'required|alpha_numeric');
+		$this->form_validation->set_rules('Pwdv', 'Mot de passe de confirmation', 'required|alpha_numeric|matches[Pwd]');
+
 		$this->form_validation->set_message('is_unique', '{field} est déjà présent dans la base.');
 
 		if ($this->form_validation->run()) {
@@ -103,14 +107,20 @@ class Accueil extends CI_Controller
 			$email = $this->input->post('Email');
 			$password = $this->input->post('Pwd');
 			$pwdhash = password_hash($password, PASSWORD_DEFAULT);
+			$clé= $this->Model_connexion->createKeyForUser();
+
 			$data = array(
 				'login' => $login,
 				'email' => $email,
-				'password' => $pwdhash
+				'password' => $pwdhash,
+				'clé'=> $clé
 			);
-
-
-				$this->Model_connexion->register($data);
+			$this->email->to($data['email']);
+			$this->email->from('Projet_alban_vasile@iut-fbleau.fr');
+			$this->email->subject('Vérification de votre compte.');
+			$this->email->message('Bonjour ! Veuillez cliquer sur ce lien afin d\'activer votre compte . https://dwarves.iut-fbleau.fr/~stelzle/Projetwims2.1_stelzle_ciocoiu/index.php/Accueil/activateUser/'.$data['clé']);
+			$this->email->send();
+			$this->Model_connexion->createNewUser($data);
 			redirect('', 'refresh');
 		}else {
 			if($this->form_validation->error_array() == null){
@@ -126,6 +136,11 @@ class Accueil extends CI_Controller
 			}
 
 			}
+		}
+		public function activateUser($key){
+			$this->load->model('Model_connexion');
+			$this->Model_connexion->ActivateAccount($key);
+
 		}
 		public function join(){
 			$this->load->view('template/View_template');

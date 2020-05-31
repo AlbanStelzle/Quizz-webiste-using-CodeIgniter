@@ -24,6 +24,13 @@ $data_pwd = array(
 	'placeholder' => 'Mot de passe',
 	'class' => 'form-control',
 );
+$data_pwdv = array(
+		'type'  => 'password',
+		'name'  => 'Pwdv',
+		'id'    => 'Pwd',
+		'placeholder' => 'Confirmer votre mot de passe',
+		'class' => 'form-control',
+);
 ?>
 <body class="text-center">
 <?php
@@ -33,11 +40,10 @@ echo form_open('',array('class'=>'form-signin'));
 echo form_input($data_login);
 echo "<br>";
 echo form_input($data_email);
-
 echo "<br>";
 
 echo form_input($data_pwd);
-
+echo form_input($data_pwdv);
 
 echo "<br>";
 echo form_submit('Register','S\'enregistrer',array('class'=>'btn btn-lg btn-primary btn-block'));
