@@ -75,11 +75,12 @@ class MenuPrincipal extends CI_Controller
 		$this->form_validation->set_rules('reponse3', 'reponse3','htmlentities' );
 		$this->form_validation->set_rules('reponse4', 'reponse4','htmlentities' );
 		$this->form_validation->set_rules('image', 'url d\'une image', 'strip_tags|valid_url');
-
+		$statut=$this->Model_quizz->getAllQuizzDataByKey($key);
 		if ($this->form_validation->run()) {
 			$data = array(
 				'id'=> $this->session->id,
 				'Nom'=> $this->Model_quizz->getNameByKey($key),
+				'statut'=>$statut['statut'][0],
 				'question'=>($this->input->post('question')),
 				'reponse1'=>($this->input->post('reponse1')),
 				'reponse2'=>($this->input->post('reponse2')),
@@ -111,8 +112,12 @@ class MenuPrincipal extends CI_Controller
 
 	public function ActiveQuizz($key){
 		$this->load->model('Model_quizz');
-		$this->Model_quizz->ActiveQuizzByKey($key);
-		redirect('MenuPrincipal/quizzHub','refresh');
+		$datadb=$this->Model_quizz->getAllQuizzDataByKey($key);
+		if($datadb!=null) {
+
+			$this->Model_quizz->ActiveQuizzByKey($key);
+			redirect('MenuPrincipal/quizzHub', 'refresh');
+		}
 
 	}
 

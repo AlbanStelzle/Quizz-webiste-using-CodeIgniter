@@ -182,9 +182,12 @@ class model_quizz extends CI_Model
 			foreach ($row as $key2 => $value) {
 				$data[$key2] = $value;
 				$data['clé']=$newKey;
+				$data['statut']="En préparation";
 				$data['idQuestion']=null;
 
 			}
+			print_r($data);
+
 			$this->db->insert('Quizz',$data);
 
 		}
