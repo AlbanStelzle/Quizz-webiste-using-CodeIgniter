@@ -128,8 +128,8 @@ class MenuPrincipal extends CI_Controller
 	}
 	public function CopyQuizz($key){
 		$this->load->model('Model_quizz');
-			$this->Model_quizz->CopyQuizzByData($key);
-				//redirect('MenuPrincipal/quizzHub','refresh');
+		$this->Model_quizz->CopyQuizzByData($key);
+		redirect('MenuPrincipal/quizzHub','refresh');
 
 
 
