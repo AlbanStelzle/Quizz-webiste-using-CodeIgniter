@@ -186,7 +186,6 @@ class model_quizz extends CI_Model
 				$data['idQuestion']=null;
 
 			}
-			print_r($data);
 
 			$this->db->insert('Quizz',$data);
 
