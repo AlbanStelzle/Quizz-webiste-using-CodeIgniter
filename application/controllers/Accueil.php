@@ -96,7 +96,7 @@ class Accueil extends CI_Controller
 
 		$this->form_validation->set_rules('Login', 'Login', 'required|alpha_numeric');
 		$this->form_validation->set_rules('Email', 'Email', 'valid_email|required|is_unique[user.email]');
-		$this->form_validation->set_rules('Pwd', 'Mot de passe', 'required|alpha_numeric');
+		$this->form_validation->set_rules('Pwd', 'Mot de passe', 'required|alpha_numeric|min_length[8]');
 		$this->form_validation->set_rules('Pwdv', 'Mot de passe de confirmation', 'required|alpha_numeric|matches[Pwd]');
 
 		$this->form_validation->set_message('is_unique', '{field} est déjà présent dans la base.');

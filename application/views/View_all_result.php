@@ -19,7 +19,7 @@
 			<th scope="col">Réponse2</th>
 			<th scope="col">Réponse3</th>
 			<th scope="col">Réponse4</th>
-			<th scope="col">Vos réponses</th>
+			<th scope="col">Réponses des élèves</th>
 			<th scope="col">Bonnes réponses</th>
 			<th scope="col">Réussi ?</th>
 
