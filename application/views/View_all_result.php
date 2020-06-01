@@ -27,10 +27,10 @@
 		</thead>
 		<tbody>
 		<?php
-
-		$scoretotal=0;
+		$moy=0;
 		for ($i = 0; $i < sizeof($dataquizz['idQuestion']); $i++) {
-
+			$scoretotal[$i]=0;
+			$nbTotalRep=0;
 			echo "<tr>";
 			echo "<th scope=\"row\" class='bg-dark' style='border-left: 0; border-right: 0;'>";
 			echo "</th>";
@@ -79,7 +79,6 @@
 					echo "</th>";
 					echo "<th scope=\"row\">";
 					echo "</th>";
-
 					echo "<th scope=\"row\" >";
 					echo "</th>";
 					echo "<th scope=\"row\">";
@@ -100,7 +99,7 @@
 
 
 					if (strcmp($dataResultQuizz['réponseséleve'][$y], $dataquizz['BonneRéponse'][$i]) == 0) {
-						$scoretotal++;
+						$scoretotal[$i]++;
 						$RepColor = "bg-success";
 						echo "<th scope=\"row \" class=\"$RepColor\">";
 						echo "</th>";
@@ -111,22 +110,40 @@
 					}
 
 					echo "</tr>";
+					$nbTotalRep++;
+
 				}
 			}
-			$nbTotalQuest= sizeof($dataResultQuizz['idQuestion']);
-			$scorePercent= ($scoretotal/$nbTotalQuest)*100;
-			$scorePercent=number_format($scorePercent,2);
-			echo "<th>";
-			echo "<span class=\"border\">Moyenne sur cette question: $scorePercent %. </span>";
-			echo "</th>";
-			$scoretotal=0;
-		}
+			$scorePercent[$i]= ($scoretotal[$i]/$nbTotalRep)*100;
+			$scorePercent[$i]=number_format($scorePercent[$i],2);
 
+			echo "<th>";
+			echo "<span>Moyenne sur cette question: $scorePercent[$i] %. </span>";
+			echo "</th>";
+			echo "<th colspan='9'>";/* A travailler ici */
+			echo"<div class=\"progress\"> 
+			  <div class=\"progress-bar\" role=\"progressbar\" style=\"width: 100%\" aria-valuenow=\"1\" aria-valuemin=\"0\" aria-valuemax=\"$nbTotalRep\"></div>
+			  <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 0%\" aria-valuenow=\"30\" aria-valuemin=\"0\" aria-valuemax=\"$nbTotalRep\"></div>
+			  <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 0%\" aria-valuenow=\"20\" aria-valuemin=\"0\" aria-valuemax=\"$nbTotalRep\"></div>
+			  <div class=\"progress - bar bg - info\" role=\"progressbar\" style=\"width: 0 % \" aria-valuenow=\"10\" aria-valuemin=\"0\" aria-valuemax=\"$nbTotalRep\"></div>
+
+			</div>";
+			echo "</th>";
+			$moy+=$scorePercent[$i];
+
+		}
+		$moy=$moy/sizeof($scorePercent);
+		echo "<tr>";
+		echo "<th>";
+		echo "<span>Moyenne sur le quizz: $moy %. </span>";
+		echo "</th>";
+		echo "<tr>";
 		echo "</tbody>";
 		echo "</table>";
 
+
 		echo anchor('MenuPrincipal/quizzHub', 'Retour à l\'accueil');
-		print_r($dataResultQuizz);
+		//print_r($dataResultQuizz);
 		?>
 
 </div>
