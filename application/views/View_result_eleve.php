@@ -11,17 +11,17 @@
 	<h1><?php echo $dataquizz['Nom'][0] ?></h1>
 	<table class="table table-hover table-bordered">
 		<thead class="thead-dark">
-		<tr>
-			<th scope="col">Question</th>
-			<th scope="col">Réponse1</th>
-			<th scope="col">Réponse2</th>
-			<th scope="col">Réponse3</th>
-			<th scope="col">Réponse4</th>
-			<th scope="col">Vos réponses</th>
-			<th scope="col">Bonnes réponses</th>
-			<th scope="col" style="width:90px">Réussi ?</th>
+			<tr>
+				<th scope="col">Question</th>
+				<th scope="col">Réponse1</th>
+				<th scope="col">Réponse2</th>
+				<th scope="col">Réponse3</th>
+				<th scope="col">Réponse4</th>
+				<th scope="col">Vos réponses</th>
+				<th scope="col">Bonnes réponses</th>
+				<th scope="col" style="width:90px">Réussi ?</th>
 
-		</tr>
+			</tr>
 		</thead>
 		<tbody>
 		<?php
@@ -66,11 +66,10 @@ $scoretotal=0;
 					echo "</th>";
 				}else{
 					$RepColor="bg-danger";
-					echo $RepColor;
 					echo "<th scope=\"row \" class=\"$RepColor\">";
 					echo "</th>";
 				}
-;
+
 			echo "</tr>";
 		}
 			$nbTotalQuest= sizeof($dataResultQuizz['idQuestion']);
