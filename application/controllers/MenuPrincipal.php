@@ -131,8 +131,18 @@ class MenuPrincipal extends CI_Controller
 		$this->Model_quizz->CopyQuizzByData($key);
 		redirect('MenuPrincipal/quizzHub','refresh');
 
+	}
+	public function checkResult($key){
+		$this->load->model('Model_quizz');
+		$this->load->model('Model_quizz_eleve');
+		$dataquizz=$this->Model_quizz->getAllQuizzDataByKey($key);
+		$dataResultQuizz= $this->Model_quizz_eleve->getAllReponseQuizzEleveByQuizzKey($key);
+		$data['dataquizz']=$dataquizz;
+		$data['dataResultQuizz']=$dataResultQuizz;
+		//print_r($data);
+		$this->load->view('template/View_template');
 
-
+		$this->load->view('View_all_result', $data);
 	}
 
 }

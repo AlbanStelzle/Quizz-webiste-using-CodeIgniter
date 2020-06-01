@@ -63,6 +63,22 @@ class Model_quizz_eleve extends CI_Model
 			return $data;
 
 	}
+	public function getAllReponseQuizzEleveByQuizzKey($clé){
+
+		$this->db->where('cléduquizz', $clé);
+		$query = $this->db->get('ResultQuizz');
+		$result = $query->result_array();
+		$i = 0;
+		foreach ($result as $row) {
+			foreach ($row as $key2 => $value) {
+				$data[$key2][$i] = $value;
+
+			}
+			$i++;
+		}
+		return $data;
+
+	}
 	public function isResultActive($key)
 	{
 		$this->db->select('clédurésultat');

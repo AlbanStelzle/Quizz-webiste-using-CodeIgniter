@@ -86,8 +86,6 @@ foreach($orderQuestion as $row) {
 			}
 			echo "<br>";
 		} else {
-			echo" <div class='row '>";
-			echo" <div class='mx-auto '>";
 
 			echo "<div class=\"form-check form-check-inline \">";
 			echo form_checkbox($data_checkbox1);

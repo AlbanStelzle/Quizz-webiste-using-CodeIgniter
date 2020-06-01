@@ -366,7 +366,7 @@
 							echo "</th>";
 
 							echo "<th scope=\"row\">";
-							echo form_open("" . $clé[$i]);
+							echo form_open("/MenuPrincipal/checkResult/" . $clé[$i]);
 							echo form_submit("VoirRésultat['$i']", 'Voir les résultat', array('class' => 'btn btn-info'));
 							echo form_close();
 							echo "</th>";
