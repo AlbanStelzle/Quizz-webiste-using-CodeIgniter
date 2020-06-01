@@ -1,17 +1,19 @@
-<body>
-<div class="container ">
+<body class="container text-center ">
 
 <?php
 $this->load->helper('string');
 $this->load->helper('form');
-
-echo "<h1 class=\"h1 display-1 \">$Nom[0]</h1>";
+echo "<br>";
+echo "<div class=\"alert alert-info\" role=\"alert\">";
+echo "<h1 class=\"h1 display-5 \">$Nom[0]</h1>"; 
+echo "</div>";
+echo "<br>";
 echo form_open('Quizz/finishQuizz/'.$clé[0]);
 $nbtotal=sizeof($Nom)-1;
 $orderQuestion= range(0,$nbtotal);
 shuffle($orderQuestion);
-var_dump($orderQuestion);
 foreach($orderQuestion as $row) {
+	echo "<div class=\"alert alert-secondary\" role=\"alert\">";
 	$data_checkbox1 = array(
 			'type' => 'checkbox',
 			'name' => "réponseéleve$idQuestion[$row]"."[]",
@@ -68,7 +70,7 @@ foreach($orderQuestion as $row) {
 
 		echo" <div class='mx-auto '>";
 
-		echo "<h1 class=\"h3 font-weight-normal mx-auto\">$question[$row]</h1>";
+		echo "<h1 class=\"h5 font-weight-normal mx-auto\">$question[$row]</h1>";
 		echo "</div>";
 		echo "</div>";
 		if ($image[$row] != null) {
@@ -87,9 +89,10 @@ foreach($orderQuestion as $row) {
 			echo "<br>";
 		} else {
 
-			echo "<div class=\"form-check form-check-inline \">";
+			echo "<div class= \"form-check form-check-inline\">";
 			echo form_checkbox($data_checkbox1);
 			echo form_label($reponse1[$row]);
+			echo "</label>";
 			echo "</div>";
 			echo "<div class=\"form-check form-check-inline \">";
 			echo form_checkbox($data_checkbox2);
@@ -113,18 +116,19 @@ foreach($orderQuestion as $row) {
 			echo"</div>";
 		}
 	}
+			echo" </div>";
 }
-echo "</br>";
-echo "</br>";
+
 echo" <div class='row '>";
 
 echo" <div class='mx-auto '>";
 	echo form_submit('SendData','Terminer le quizz',array('class'=>'btn btn-md btn-primary btn-block'));
+	echo "</br>";
+	echo "</br>";
+	echo "</br>";
 	echo form_close();
 	echo"</div>";
 			echo"</div>";
 			?>
-
-	</div>
 
 </body>
