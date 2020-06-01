@@ -76,7 +76,7 @@ $scoretotal=0;
 			$nbTotalQuest= sizeof($dataResultQuizz['idQuestion']);
 		$scorePercent= ($scoretotal/$nbTotalQuest)*100;
 			echo "<th>";
-		echo "<span class=\"border\">Votre résultat: $scorePercent % </span>";
+		echo "<span class=\"border\">Votre résultat: $scorePercent %. </span>";
 			echo "</th>";
 
 		echo "</tbody>";
