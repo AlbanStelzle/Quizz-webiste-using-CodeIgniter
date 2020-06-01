@@ -80,7 +80,7 @@ class MenuPrincipal extends CI_Controller
 			$data = array(
 				'id'=> $this->session->id,
 				'Nom'=> $this->Model_quizz->getNameByKey($key),
-				'statut'=>$statut['statut'][0],
+				'statut'=>'En préparation',
 				'question'=>($this->input->post('question')),
 				'reponse1'=>($this->input->post('reponse1')),
 				'reponse2'=>($this->input->post('reponse2')),
