@@ -56,7 +56,10 @@
 </head>
 
 <div class="table-responsive">
-	<h1><?php echo $Nom[0] ?></h1>
+	<div class="alert alert-info my-0" role="alert">
+	<h1 class="h1 display-5 text-center "><?php echo $Nom[0]?></h1>
+	</div>
+
 	<table class="table table-hover table-bordered">
 		<thead class="thead-dark">
 		<tr>
@@ -171,7 +174,9 @@
 		echo form_close();
 		echo "</tbody>";
 		echo "</table>";
-		echo anchor('MenuPrincipal/quizzHub', 'Retour à la liste de vos quizz');
+		echo "<div class=\"text-center\">";
+		echo anchor('MenuPrincipal/','Retour au menu principal',array('class'=>'btn btn-outline-danger mb-4'));
+		echo "</div>";
 		?>
 </div>
 </body>

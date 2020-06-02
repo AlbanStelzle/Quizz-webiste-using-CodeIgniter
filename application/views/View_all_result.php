@@ -6,9 +6,16 @@
 	<?php
 	?>
 </head>
+	<br>
+	<div class="alert alert-info" role="alert">
+	<h1 class="h1 display-5 text-center"><?php echo $dataquizz['Nom'][0] ?></h1>
+	</div>
+	<br>
+		
+
 
 <div class="table-responsive">
-	<h1><?php echo $dataquizz['Nom'][0] ?></h1>
+
 	<table class="table table-hover table-bordered">
 		<thead class="thead-dark">
 		<tr>
@@ -168,15 +175,12 @@
 			$scorePercent[$i]= ($scoretotal[$i]/$nbTotalRep)*100;
 			$scorePercent[$i]=number_format($scorePercent[$i],2);
 
-			echo "<th>";
-			echo "<span>Moyenne sur cette question: $scorePercent[$i] %. </span>";
-			echo "</th>";
 
 			$réponses1total=($réponses1total/$réponsestotal)*100;
 			$réponses2total=($réponses2total/$réponsestotal)*100;
 			$réponses3total=($réponses3total/$réponsestotal)*100;
 			$réponses4total=($réponses4total/$réponsestotal)*100;
-			echo "<th colspan='9'>";/* A travailler ici */
+			echo "<th colspan='6'>";/* A travailler ici */
 			echo"<div class=\"progress\"> 
 			  <div class=\"progress-bar\" role=\"progressbar\" style=\"width: $réponses1total%\" aria-valuenow=\"$réponses1total\" aria-valuemin=\"0\" aria-valuemax=\"2\"> Réponse1: $réponses1total%</div>
 			  <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: $réponses2total%\" aria-valuenow=\"$réponses2total\" aria-valuemin=\"0\" aria-valuemax=\"100\">Réponse2: $réponses2total%</div>
@@ -185,20 +189,48 @@
 
 			</div>";
 			echo "</th>";
+			echo "<th colspan='4'>";
+			echo "<span>Moyenne sur cette question: $scorePercent[$i] %. </span>";
+			echo "</th>";
+			echo "<tr>";
+			echo "<th colspan='10' class='bg-dark'>";
+			echo "</th>";
+			echo "</tr>";
 			$moy+=$scorePercent[$i];
 
 		}
 		$moy=$moy/sizeof($scorePercent);
-		echo "<tr>";
-		echo "<th>";
+		$moy=number_format($moy,2);
+		if ($moy >= 50) {
+			echo "<tr>";
+		echo "<th colspan= '10' class=\"text-right bg-success\">";
 		echo "<span>Moyenne sur le quizz: $moy %. </span>";
 		echo "</th>";
 		echo "<tr>";
 		echo "</tbody>";
 		echo "</table>";
+			
+		}else{
+			echo "<tr>";
+		echo "<th colspan= '10' class=\"text-right bg-danger\">";
+		echo "<span>Moyenne sur le quizz: $moy %. </span>";
+		echo "</th>";
+		echo "<tr>";
+		echo "</tbody>";
+		echo "</table>";
+		}
 
 
-		echo anchor('MenuPrincipal/quizzHub', 'Retour à l\'accueil');
+
+
+		echo "<div class=\"container text-center\" style=\"width: 400px\">";
+
+		echo anchor('MenuPrincipal/quizzHub', 'Retour à l\'accueil',array('class'=>'btn btn-lg btn-block btn-outline-primary','style'=>'width:100%'));
+		echo "</div>";
+		echo "<br>";
+		echo "<br>";
+		echo "<br>";
+
 		//print_r($dataResultQuizz);
 		?>
 

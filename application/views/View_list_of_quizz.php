@@ -43,7 +43,10 @@
 		</script>
 		</head>
 		<div class="w-auto">
-		<h1 class="display-4">Liste de vos quizz</h1>
+			<div class="alert alert-info my-0" role="alert">
+			<h1 class="h1 display-5 text-center">Liste de vos quizz</h1>
+			</div>
+
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
 		<li class="nav-item" role="presentation">
 		<a class="nav-link" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="false">Tous vos quizz</a>
@@ -389,7 +392,7 @@
 		<div class="text-center">
 		<?php
 
-		echo anchor('MenuPrincipal/','Retour au menu principal',array('class'=>'btn btn-outline-danger'));
+		echo anchor('MenuPrincipal/','Retour au menu principal',array('class'=>'btn btn-outline-danger mb-4'));
 
 		?>
 
