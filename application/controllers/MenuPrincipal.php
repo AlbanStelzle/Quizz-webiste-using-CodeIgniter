@@ -91,6 +91,7 @@ class MenuPrincipal extends CI_Controller
 				'BonneRéponse'=>($this->input->post('BonneRéponse'))
 			);
 			$this->Model_quizz->addQuestionToQuizz($data);
+			sleep(1); //anti force brute
 
 			redirect('MenuPrincipal/modifyQuizz/'.$key);
 		} else {
@@ -112,11 +113,13 @@ class MenuPrincipal extends CI_Controller
 
 	public function ActiveQuizz($key){
 		$this->load->model('Model_quizz');
-		$datadb=$this->Model_quizz->getAllQuizzDataByKey($key);
-		if($datadb!=null) {
+
+		if($this->Model_quizz->getAllQuizzDataByKey($key)) {
 
 			$this->Model_quizz->ActiveQuizzByKey($key);
 			redirect('MenuPrincipal/quizzHub', 'refresh');
+		}else{
+			echo "test";
 		}
 
 	}

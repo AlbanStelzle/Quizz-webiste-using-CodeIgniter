@@ -59,6 +59,7 @@ class Accueil extends CI_Controller
 	 					'id' => $datadb->id
 	 				);
 	 				$this->session->set_userdata($session_data);
+	 				sleep(1); //anti force brute
 	 				redirect(MenuPrincipal);
 
 	 			} else {
@@ -95,11 +96,13 @@ class Accueil extends CI_Controller
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('Login', 'Login', 'required|alpha_numeric');
-		$this->form_validation->set_rules('Email', 'Email', 'valid_email|required|is_unique[user.email]');
+		$this->form_validation->set_rules('Email', 'Email', 'valid_email|required|is_unique[user.email]|is_unique[user_waiting.email]');
 		$this->form_validation->set_rules('Pwd', 'Mot de passe', 'required|alpha_numeric|min_length[8]');
 		$this->form_validation->set_rules('Pwdv', 'Mot de passe de confirmation', 'required|alpha_numeric|matches[Pwd]');
 
 		$this->form_validation->set_message('is_unique', '{field} est déjà présent dans la base.');
+
+		$this->load->config('email');
 
 		if ($this->form_validation->run()) {
 
@@ -115,13 +118,19 @@ class Accueil extends CI_Controller
 				'password' => $pwdhash,
 				'clé'=> $clé
 			);
+
+			$this->email->set_newline("\r\n");
 			$this->email->to($data['email']);
-			$this->email->from('Projet_alban_vasile@iut-fbleau.fr');
+			$this->email->from('Projectwimsstelzleciocoiu@outlook.fr','Project wims');
 			$this->email->subject('Vérification de votre compte.');
 			$this->email->message('Bonjour ! Veuillez cliquer sur ce lien afin d\'activer votre compte . https://dwarves.iut-fbleau.fr/~stelzle/Projetwims2.1_stelzle_ciocoiu/index.php/Accueil/activateUser/'.$data['clé']);
-			$this->email->send();
-			$this->Model_connexion->createNewUser($data);
-			redirect('', 'refresh');
+			if($this->email->send()) {
+				$this->Model_connexion->createNewUser($data);
+				redirect('Accueil/redirection');
+			}else{
+				echo "erreur";
+			}
+
 		}else {
 			if($this->form_validation->error_array() == null){
 				$this->load->view('template/View_template');
@@ -147,6 +156,11 @@ class Accueil extends CI_Controller
 			$this->load->view('template/View_template_center');
 			$this->load->view('View_join');
 
+		}
+		public function redirection(){
+			$this->load->view('View_redirection');
+			sleep(5); //anti force brute
+			redirect('Accueil/login');
 		}
 
 }

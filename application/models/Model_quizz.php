@@ -54,16 +54,22 @@ class model_quizz extends CI_Model
 		$this->db->where('clé', $key);
 		$this->db->where('question!=', null);
 		$query = $this->db->get('Quizz');
-		$result = $query->result_array();
-		$i =0;
-		foreach ($result as $row) {
-			foreach ($row as $key2 => $value) {
-				$data[$key2][$i] = $value;
+			$result = $query->result_array();
+			if($result!=null){
+				$i = 0;
+				foreach ($result as $row) {
+					foreach ($row as $key2 => $value) {
+						$data[$key2][$i] = $value;
 
+					}
+					$i++;
+				}
+				return $data;
+			}else{
+				return false;
 			}
-			$i++;
-		}
-		return $data;
+
+
 	}
 
 	public function createKey()
