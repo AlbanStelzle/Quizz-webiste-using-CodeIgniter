@@ -9,7 +9,7 @@ class Quizz extends CI_Controller
 		$this->load->library('form_validation');
 	}
 
-	public function joinQuizz()
+	public function joinQuizz() //permet à un élève de lancer un quizz et d'y répondre
 	{
 		$this->load->model('Model_quizz');
 		$this->form_validation->set_rules('clé', 'clé', 'callback_is_active');
@@ -32,20 +32,20 @@ class Quizz extends CI_Controller
 		}
 		}
 
-	public function is_active($key){
+	public function is_active($key){ //Permet de vérifier si le quizz est actif
 		$this->load->model('Model_quizz');
 		return $this->Model_quizz->isQuizzActive($key);
 	}
-	public function is_expired($key){
+	public function is_expired($key){ //Permet de vérifier si le quizz est inactif
 		$this->load->model('Model_quizz');
 		return $this->Model_quizz->isQuizzExpired($key);
 	}
 
-	public function is_active_eleve($key){
+	public function is_active_eleve($key){ //permet de vérifier si la clé de l'élève est active
 		$this->load->model('Model_quizz_eleve');
 		return $this->Model_quizz_eleve->isResultActive($key);
 	}
-	public function finishQuizz($key){
+	public function finishQuizz($key){ // récupère toutes les données du quizz fait par un élève et affiche la page de fin avec la clé élève pour ses résultats
 		$this->load->model('Model_quizz_eleve');
 		$this->load->model('Model_quizz');
 		$dataQuizz = $this->Model_quizz->getAllQuizzDataByKey($key);
@@ -73,6 +73,19 @@ class Quizz extends CI_Controller
 				$i++;
 
 
+			}else{
+				$data[$i]=0;
+				$dataall = array(
+					'noméleve' => $this->session->nom,
+					'prenoméleve' => $this->session->prenom,
+					'cléduquizz' => $key,
+					'idQuestion' => $numQuestion,
+					'réponseséleve' => $data[$i],
+					'clédurésultat' => $cléeleve
+				);
+				$this->Model_quizz_eleve->addReponseByEleve($dataall);
+
+				$i++;
 			}
 		}
 		$this->load->view('template/View_template');
@@ -80,7 +93,7 @@ class Quizz extends CI_Controller
 		$this->load->view('View_quizz_finished', $dataall);
 	}
 
-	public function resultPage(){
+	public function resultPage(){ //affiche la page de résultat de l'élève
 		$this->form_validation->set_rules('clédurésultat', 'clé', 'required|callback_is_active_eleve|callback_is_expired');
 		$this->form_validation->set_message('is_active_eleve', 'La {field} n\'existe pas dans la base.');
 		$this->form_validation->set_message('is_expired', 'La {field} n\'est pas encore prête pour accéder aux résultats.');

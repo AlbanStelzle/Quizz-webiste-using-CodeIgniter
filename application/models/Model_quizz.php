@@ -48,6 +48,16 @@ class model_quizz extends CI_Model
 		}
 		return $data;
 	}
+	public function getTimerFromQuizzByKey($key){
+		$this->db->select('temps');
+		$this->db->where('clé', $key);
+		$this->db->where('question', null);
+		$query=$this->db->get('Quizz');
+		foreach ($query->result() as $row) {
+		}
+		return $row->temps;
+
+	}
 
 	public function getAllQuizzDataByKey($key)
 	{
@@ -196,6 +206,10 @@ class model_quizz extends CI_Model
 			$this->db->insert('Quizz',$data);
 
 		}
+	}
+	public function modifyTimerOnQuizzByKey($data){
+		$this->db->where('clé', $data['clé']);
+		$this->db->update('Quizz', $data);
 	}
 
 }

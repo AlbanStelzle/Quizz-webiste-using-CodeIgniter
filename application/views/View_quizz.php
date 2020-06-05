@@ -52,6 +52,13 @@
 			'placeholder' => 'url d\'une image',
 			'class' => 'form-control',
 	);
+	$data_temps = array(
+			'type' => 'text',
+			'name' => 'timer',
+			'placeholder' => 'Timer pour ce quizz (en minute)',
+			'class' => 'form-control mx-auto',
+			'style'=>'width:260px',
+	);
 	?>
 </head>
 
@@ -175,6 +182,11 @@
 		echo "</tbody>";
 		echo "</table>";
 		echo "<div class=\"text-center\">";
+		echo "<p> Temps actuel pour ce quizz : $temps[0] min.";
+		echo form_open('MenuPrincipal/modifyTimer/'.$clé[0]);
+		echo form_input($data_temps);
+		echo form_submit('Ajouter du temps','Ajouter le timer',array('class'=>'btn btn-primary '));
+		echo form_close();
 		echo anchor('MenuPrincipal/','Retour au menu principal',array('class'=>'btn btn-outline-danger mb-4'));
 		echo "</div>";
 		?>

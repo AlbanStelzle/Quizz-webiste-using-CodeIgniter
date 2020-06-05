@@ -1,5 +1,26 @@
 <body class="container text-center ">
 
+<script>
+	var tempsmax = <?php echo json_encode($temps[0]); ?>;
+	var debut = new Date().getTime();
+	var tempsRestant = tempsmax - (new Date().getTime() -  debut);
+	var min=tempsmax-1;
+	var sec=60;
+	setTimeout('document.getElementById(\'form\').submit();',(tempsmax*60*1000));
+	setInterval(function(){
+		sec--;
+		if(sec==0){
+			min--;
+			sec=59;
+		}
+
+
+		document.getElementById("timing").innerHTML='Temps restant: '+min.toString() +':'+ sec.toString();
+		console.log(t);
+	},1000);
+
+</script>
+
 <?php
 $this->load->helper('string');
 $this->load->helper('form');
@@ -8,7 +29,8 @@ echo "<div class=\"alert alert-info\" role=\"alert\">";
 echo "<h1 class=\"h1 display-5 \">$Nom[0]</h1>"; 
 echo "</div>";
 echo "<br>";
-echo form_open('Quizz/finishQuizz/'.$clé[0]);
+echo "<span id = 'timing'> </span>";
+echo form_open('Quizz/finishQuizz/'.$clé[0],array('id'=>'form'));
 $nbtotal=sizeof($Nom)-1;
 $orderQuestion= range(0,$nbtotal);
 shuffle($orderQuestion);
@@ -128,7 +150,8 @@ echo" <div class='mx-auto '>";
 	echo "</br>";
 	echo form_close();
 	echo"</div>";
-			echo"</div>";
-			?>
+	echo"</div>";
+//
+?>
 
 </body>

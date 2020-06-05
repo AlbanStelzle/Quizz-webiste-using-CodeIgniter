@@ -53,7 +53,7 @@ class model_connexion extends CI_Model
 	}
 	public function ActivateAccount($key){
 		$this->db->where('clé', $key);
-		$this->db->select('login, email,password,id');
+		$this->db->select('login, email,password');
 		$query=$this->db->get('user_waiting');
 		foreach ($query->result() as $data)
 		{
