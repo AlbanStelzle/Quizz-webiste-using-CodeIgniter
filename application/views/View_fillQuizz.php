@@ -2,10 +2,13 @@
 <!--Timer -->
 <script>
 	var tempsmax = <?php echo json_encode($temps[0]); ?>;
-	var debut = new Date().getTime();
-	var tempsRestant = tempsmax - (new Date().getTime() -  debut);
 	var min=tempsmax-1;
 	var sec=60;
+	var heure=0;
+	if(tempsmax>60){
+		heure=Math.trunc(tempsmax/60);
+		min=tempsmax-heure*60-1;
+	}
 	setTimeout('document.getElementById(\'form\').submit();',(tempsmax*60*1000));
 	setInterval(function(){
 		sec--;
@@ -13,10 +16,11 @@
 			min--;
 			sec=59;
 		}
-
-
-		document.getElementById("timing").innerHTML='Temps restant: '+min.toString() +':'+ sec.toString();
-		console.log(t);
+		if(min==0){
+			heure--;
+			min=59;
+		}
+		document.getElementById("timing").innerHTML='Temps restant: '+heure.toString()+":"+min.toString() +':'+ sec.toString();
 	},1000);
 
 </script>
