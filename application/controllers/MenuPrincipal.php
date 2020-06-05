@@ -72,7 +72,7 @@ class MenuPrincipal extends CI_Controller
 
 		$this->load->model('Model_quizz');
 		$this->form_validation->set_rules('question', 'Question', 'required|htmlentities','Une question est nécessaire');
-		$this->form_validation->set_rules('BonneRéponse', 'Numéros réponses', 'required|htmlentities','Une ou des bonnes réponses sont nécessaires');
+		$this->form_validation->set_rules('BonneRéponse', 'Numéros réponses', 'required|htmlentities|is_natural_no_zero','Une ou des bonnes réponses sont nécessaires');
 		$this->form_validation->set_rules('reponse1', 'reponse1', 'required|htmlentities','2 réponses minimum sont nécessaires');
 		$this->form_validation->set_rules('reponse2', 'reponse2', 'required|htmlentities','2 réponses minimum sont nécessaires');
 		$this->form_validation->set_rules('reponse3', 'reponse3','htmlentities' );
@@ -126,6 +126,8 @@ class MenuPrincipal extends CI_Controller
 			} else {
 				echo "test";
 			}
+		}else{
+			redirect('MenuPrincipal/quizzHub');
 		}
 
 	}

@@ -54,7 +54,7 @@ class Quizz extends CI_Controller
 		foreach($dataQuizz['idQuestion'] as $numQuestion) {
 			if ($this->input->post('réponseéleve' . $numQuestion) != null) {
 				if (is_array($this->input->post('réponseéleve' . $numQuestion))) {
-					$data[$i] = implode(',', $this->input->post('réponseéleve' . $numQuestion));
+					$data[$i] = implode('', $this->input->post('réponseéleve' . $numQuestion));
 				} else {
 					$data[$i] = $this->input->post('réponseéleve' . $numQuestion);
 

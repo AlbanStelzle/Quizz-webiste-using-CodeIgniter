@@ -11,18 +11,22 @@
 			'name' => 'question',
 			'placeholder' => 'Question',
 			'class' => 'form-control',
+			'value'=> $_POST['question'] ?? ""
 	);
 	$data_nm_reponse = array(
 			'type' => 'text',
 			'name' => 'BonneRéponse',
 			'placeholder' => 'Numéros réponses',
 			'class' => 'form-control',
+
 	);
 	$data_reponse1 = array(
 			'type' => 'text',
 			'name' => 'reponse1',
 			'placeholder' => 'reponse1',
 			'class' => 'form-control',
+			'value'=> $_POST['reponse1'] ?? ""
+
 	);
 	$data_reponse2 = array(
 			'type' => 'text',
@@ -30,6 +34,8 @@
 			'id' => 'reponse2',
 			'placeholder' => 'reponse2',
 			'class' => 'form-control',
+			'value'=> $_POST['reponse2'] ?? ""
+
 	);
 	$data_reponse3 = array(
 			'type' => 'text',
@@ -37,6 +43,8 @@
 			'id' => 'reponse3',
 			'placeholder' => 'reponse3',
 			'class' => 'form-control',
+			'value'=> $_POST['reponse3'] ?? ""
+
 	);
 	$data_reponse4 = array(
 			'type' => 'text',
@@ -44,6 +52,8 @@
 			'id' => 'reponse4',
 			'placeholder' => 'reponse4',
 			'class' => 'form-control',
+			'value'=> $_POST['reponse4'] ?? ""
+
 	);
 	$data_image = array(
 			'type' => 'text',
@@ -51,6 +61,8 @@
 			'id' => 'image',
 			'placeholder' => 'url d\'une image',
 			'class' => 'form-control',
+			'value'=> $_POST['image'] ?? ""
+
 	);
 	$data_temps = array(
 			'type' => 'text',
