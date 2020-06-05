@@ -1,5 +1,5 @@
 <body class="container text-center ">
-
+<!--Timer -->
 <script>
 	var tempsmax = <?php echo json_encode($temps[0]); ?>;
 	var debut = new Date().getTime();
@@ -20,7 +20,7 @@
 	},1000);
 
 </script>
-
+<!-- Fin timer -->
 <?php
 $this->load->helper('string');
 $this->load->helper('form');

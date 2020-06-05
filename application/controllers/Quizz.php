@@ -74,13 +74,12 @@ class Quizz extends CI_Controller
 
 
 			}else{
-				$data[$i]=0;
 				$dataall = array(
 					'noméleve' => $this->session->nom,
 					'prenoméleve' => $this->session->prenom,
 					'cléduquizz' => $key,
 					'idQuestion' => $numQuestion,
-					'réponseséleve' => $data[$i],
+					'réponseséleve' => 'Pas répondu',
 					'clédurésultat' => $cléeleve
 				);
 				$this->Model_quizz_eleve->addReponseByEleve($dataall);
