@@ -12,7 +12,7 @@
 	setTimeout('document.getElementById(\'form\').submit();',(tempsmax*60*1000));
 	setInterval(function(){
 		sec--;
-		if(sec==0){
+		if(sec<0){
 			min--;
 			sec=59;
 		}
@@ -21,7 +21,7 @@
 			min=59;
 		}
 		document.getElementById("timing").innerHTML='Temps restant: '+heure.toString()+":"+min.toString() +':'+ sec.toString();
-	},1000);
+	},100);
 
 </script>
 <!-- Fin timer -->
