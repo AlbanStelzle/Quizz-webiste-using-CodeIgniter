@@ -21,7 +21,7 @@
 			min=59;
 		}
 		document.getElementById("timing").innerHTML='Temps restant: '+heure.toString()+":"+min.toString() +':'+ sec.toString();
-	},100);
+	},1000);
 
 </script>
 <!-- Fin timer -->
