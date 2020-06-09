@@ -52,14 +52,14 @@ $scoretotal=0;
 				echo "</th>";
 
 				echo "<th scope=\"row\">";
-				echo $dataResultQuizz['réponseséleve'][$i];
+				echo $dataResultQuizz['reponseseleve'][$i];
 				echo "</th>";
 
 				echo "<th scope=\"row\">";
-				echo $dataquizz['BonneRéponse'][$i];
+				echo $dataquizz['BonneReponse'][$i];
 				echo "</th>";
 
-				if(strcmp($dataResultQuizz['réponseséleve'][$i],$dataquizz['BonneRéponse'][$i])==0){
+				if(strcmp($dataResultQuizz['reponseseleve'][$i],$dataquizz['BonneReponse'][$i])==0){
 					$scoretotal++;
 					$RepColor="bg-success";
 					echo "<th scope=\"row \" class=\"$RepColor\">";

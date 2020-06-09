@@ -52,21 +52,21 @@ class Quizz extends CI_Controller
 		$i=0;
 		$cléeleve=$this->Model_quizz_eleve->createKey();
 		foreach($dataQuizz['idQuestion'] as $numQuestion) {
-			if ($this->input->post('réponseéleve' . $numQuestion) != null) {
-				if (is_array($this->input->post('réponseéleve' . $numQuestion))) {
-					$data[$i] = implode('', $this->input->post('réponseéleve' . $numQuestion));
+			if ($this->input->post('reponseseleve' . $numQuestion) != null) {
+				if (is_array($this->input->post('reponseseleve' . $numQuestion))) {
+					$data[$i] = implode('', $this->input->post('reponseeleve' . $numQuestion));
 				} else {
-					$data[$i] = $this->input->post('réponseéleve' . $numQuestion);
+					$data[$i] = $this->input->post('reponseseleve' . $numQuestion);
 
 				}
 
 				$dataall = array(
-					'noméleve' => $this->session->nom,
-					'prenoméleve' => $this->session->prenom,
-					'cléduquizz' => $key,
+					'nomeleve' => $this->session->nom,
+					'prenomeleve' => $this->session->prenom,
+					'cleduquizz' => $key,
 					'idQuestion' => $numQuestion,
-					'réponseséleve' => $data[$i],
-					'clédurésultat' => $cléeleve
+					'reponseseleve' => $data[$i],
+					'cleduresultat' => $cléeleve
 				);
 				$this->Model_quizz_eleve->addReponseByEleve($dataall);
 
@@ -75,12 +75,12 @@ class Quizz extends CI_Controller
 
 			}else{
 				$dataall = array(
-					'noméleve' => $this->session->nom,
-					'prenoméleve' => $this->session->prenom,
-					'cléduquizz' => $key,
+					'nomeleve' => $this->session->nom,
+					'prenomeleve' => $this->session->prenom,
+					'cleduquizz' => $key,
 					'idQuestion' => $numQuestion,
-					'réponseséleve' => 'Pas répondu',
-					'clédurésultat' => $cléeleve
+					'reponseseleve' => 'Pas répondu',
+					'cleduresultat' => $cléeleve
 				);
 				$this->Model_quizz_eleve->addReponseByEleve($dataall);
 
@@ -93,12 +93,12 @@ class Quizz extends CI_Controller
 	}
 
 	public function resultPage(){ //affiche la page de résultat de l'élève
-		$this->form_validation->set_rules('clédurésultat', 'clé', 'required|callback_is_active_eleve|callback_is_expired');
+		$this->form_validation->set_rules('cleduresultat', 'clé', 'required|callback_is_active_eleve|callback_is_expired');
 		$this->form_validation->set_message('is_active_eleve', 'La {field} n\'existe pas dans la base.');
 		$this->form_validation->set_message('is_expired', 'La {field} n\'est pas encore prête pour accéder aux résultats.');
 
 		if ($this->form_validation->run()) {
-			$cléeleve=$this->input->post('clédurésultat');
+			$cléeleve=$this->input->post('cleduresultat');
 
 			$this->load->model('Model_quizz_eleve');
 			$cléquizz=$this->Model_quizz_eleve->getQuizzKeyByEleveKey($cléeleve);

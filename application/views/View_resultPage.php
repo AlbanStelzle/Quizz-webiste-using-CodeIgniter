@@ -1,13 +1,13 @@
 <?php
-if(form_error('clédurésultat')==null){
+if(form_error('cleduresultat')==null){
 	$validation_key= "";
 }else{
 	$validation_key= "is-invalid";
 
 }
-$data_clé = array(
+$data_cle = array(
 	'type'  => 'text',
-	'name'  => 'clédurésultat',
+	'name'  => 'cleduresultat',
 	'placeholder' => 'Clé du quizz élève',
 	'class' => "form-control $validation_key",
 );
@@ -23,8 +23,8 @@ $data_clé = array(
 
 <?php
 	echo form_open('',array('class'=>'form-signin'));
-	echo form_input($data_clé);
-	echo form_error('clédurésultat','<div class="invalid-feedback">','</div>');
+	echo form_input($data_cle);
+	echo form_error('cleduresultat','<div class="invalid-feedback">','</div>');
 	echo "<br>";
 	echo form_submit('SendDataEleve','Accéder aux résultats',array('class'=>'btn btn-lg btn-primary btn-block'));
 	echo form_close();

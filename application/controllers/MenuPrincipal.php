@@ -56,7 +56,7 @@ class MenuPrincipal extends CI_Controller
 			$this->load->view('View_list_of_quizz',$name);
 		}
 	}
-	public function deleteQuizzByKey($key){ //fonction qui supprime un quizz via sa clé
+	public function deleteQuizzByKey($key){ //fonction qui supprime un quizz via sa cle
 		$this->Model_quizz->deleteQuizzByKey($key);
 		redirect('MenuPrincipal/quizzHub','refresh');
 	}
@@ -77,7 +77,7 @@ class MenuPrincipal extends CI_Controller
 	public function addQuestionToQuizz($key){ //fonction qui permet d'ajouter une question à un quizz
 
 		$this->form_validation->set_rules('question', 'Question', 'required|htmlentities','Une question est nécessaire');
-		$this->form_validation->set_rules('BonneRéponse', 'Numéros réponses', 'required|htmlentities|is_natural_no_zero|callback_isReponseExist','Une ou des bonnes réponses sont nécessaires');
+		$this->form_validation->set_rules('BonneReponse', 'Numéros réponses', 'required|htmlentities|is_natural_no_zero|callback_isReponseExist','Une ou des bonnes réponses sont nécessaires');
 		$this->form_validation->set_rules('reponse1', 'reponse1', 'required|htmlentities','2 réponses minimum sont nécessaires');
 		$this->form_validation->set_rules('reponse2', 'reponse2', 'required|htmlentities','2 réponses minimum sont nécessaires');
 		$this->form_validation->set_rules('reponse3', 'reponse3','htmlentities' );
@@ -97,9 +97,9 @@ class MenuPrincipal extends CI_Controller
 				'reponse3'=>($this->input->post('reponse3')),
 				'reponse4'=>($this->input->post('reponse4')),
 				'image'=>($this->input->post('image')),
-				'clé'=> $key,
+				'cle'=> $key,
 				'temps'=> $timer,
-				'BonneRéponse'=>($this->input->post('BonneRéponse'))
+				'BonneReponse'=>($this->input->post('BonneReponse'))
 			);
 			$this->Model_quizz->addQuestionToQuizz($data);
 			sleep(1); //anti force brute
@@ -114,14 +114,13 @@ class MenuPrincipal extends CI_Controller
 
 	}
 
-	public function DelQuestion($idQuestion){ //fonction qui supprime une question d'un quizz via son id
+	public function DelQuestion($idQuestion,$key){ //fonction qui supprime une question d'un quizz via son id
 
 		$this->Model_quizz->delQuestionById($idQuestion);
-		redirect('MenuPrincipal/quizzHub','refresh');
-
+		redirect('MenuPrincipal/modifyQuizz/'.$key);
 	}
 
-	public function ActiveQuizz($key){ //fonction qui permet d'activer le quizz via sa clé et le rend disponible pour les élèves
+	public function ActiveQuizz($key){ //fonction qui permet d'activer le quizz via sa cle et le rend disponible pour les élèves
 		$timer= $this->Model_quizz->getTimerFromQuizzByKey($key);
 		if($timer>0) {
 			if ($this->Model_quizz->getAllQuizzDataByKey($key)) {
@@ -160,7 +159,7 @@ class MenuPrincipal extends CI_Controller
 		$this->form_validation->set_rules('timer', 'Chrono', 'greater_than[0]');
 		if ($this->form_validation->run()) {
 			$data['temps']=$timer;
-			$data['clé']=$key;
+			$data['cle']=$key;
 			$this->Model_quizz->modifyTimerOnQuizzByKey($data);
 			redirect('MenuPrincipal/modifyQuizz/'.$key);
 		} else {

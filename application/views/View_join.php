@@ -1,22 +1,22 @@
 <?php
 
-$data_clé = array(
+$data_cle = array(
 	'type'  => 'text',
-	'name'  => 'clé',
+	'name'  => 'cle',
 	'placeholder' => 'Entrez la clé du quizz',
 	'class' => "form-control ",
 	'required' => 'required'
 );
 $data_prenom = array(
 		'type'  => 'text',
-		'name'  => 'prenom',
+		'name'  => 'prenomeleve',
 		'placeholder' => 'Prénom',
 		'class' => "form-control ",
 		'required' => 'required'
 );
 $data_nom = array(
 		'type'  => 'text',
-		'name'  => 'nom',
+		'name'  => 'nomeleve',
 		'placeholder' => 'Nom',
 		'class' => "form-control ",
 		'required' => 'required'
@@ -28,7 +28,7 @@ $data_nom = array(
 	<?php  echo form_open('Quizz/joinQuizz/',array('class'=>'form-signin'));
 	echo"<h1 class=\" h3 mb-3 font-weight-normal\">Quizz</h1>";
 
-	echo form_input($data_clé);
+	echo form_input($data_cle);
 	echo "<br>";
 	echo form_input($data_prenom);
 	echo "<br>";

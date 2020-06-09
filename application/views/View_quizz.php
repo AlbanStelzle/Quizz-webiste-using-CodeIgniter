@@ -15,7 +15,7 @@
 	);
 	$data_nm_reponse = array(
 			'type' => 'text',
-			'name' => 'BonneRéponse',
+			'name' => 'BonneReponse',
 			'placeholder' => 'Numéros réponses',
 			'class' => 'form-control',
 
@@ -127,10 +127,10 @@
 				}
 				echo "</th>";
 				echo "<th scope=\"row\">";
-				echo $BonneRéponse[$i];
+				echo $BonneReponse[$i];
 				echo "</th>";
 				echo "<th scope=\"row\">";
-				echo form_open('/MenuPrincipal/DelQuestion/' . $idQuestion[$i] . '/' . $clé[0]);
+				echo form_open('/MenuPrincipal/DelQuestion/' . $idQuestion[$i] . '/' . $cle[0]);
 				echo form_submit('DelQuest', 'Supprimer la question', array('class' => 'btn btn-danger'));
 				echo form_close();
 			}
@@ -140,7 +140,7 @@
 
 		echo "</div>";
 
-		echo form_open('/MenuPrincipal/addQuestionToQuizz/' . $clé[0]);
+		echo form_open('/MenuPrincipal/addQuestionToQuizz/'.$cle[0]);
 		echo "<th>";
 
 		echo form_input($data_question);
@@ -184,7 +184,7 @@
 		echo "<th>";
 
 		echo form_input($data_nm_reponse);
-		echo form_error('BonneRéponse');
+		echo form_error('BonneReponse');
 
 		echo "</th>";
 		echo "<th>";
@@ -195,7 +195,7 @@
 		echo "</table>";
 		echo "<div class=\"text-center\">";
 		echo "<p> Temps actuel pour ce quizz : $temps[0] min.";
-		echo form_open('MenuPrincipal/modifyTimer/'.$clé[0]);
+		echo form_open('MenuPrincipal/modifyTimer/'.$cle[0]);
 		echo form_input($data_temps);
 		echo form_submit('Ajouter du temps','Ajouter le timer',array('class'=>'btn btn-primary '));
 		echo form_close();

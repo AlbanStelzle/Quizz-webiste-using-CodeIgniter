@@ -90,7 +90,7 @@ class Accueil extends CI_Controller
 	{
 
 
-		$this->form_validation->set_rules('Login', 'Login', 'required|alpha_numeric');
+		$this->form_validation->set_rules('Login', 'Login', 'required|alpha_numeric_spaces');
 		$this->form_validation->set_rules('Email', 'Email', 'valid_email|required|is_unique[user.email]|is_unique[user_waiting.email]');
 		$this->form_validation->set_rules('Pwd', 'Mot de passe', 'required|alpha_numeric|min_length[8]');
 		$this->form_validation->set_rules('Pwdv', 'Mot de passe de confirmation', 'required|alpha_numeric|matches[Pwd]');
@@ -111,17 +111,19 @@ class Accueil extends CI_Controller
 				'login' => $login,
 				'email' => $email,
 				'password' => $pwdhash,
-				'clé'=> $clé
+				'cle'=> $clé
 			);
 				$this->email->set_newline("\r\n");
 				$this->email->to($data['email']);
 				$this->email->from('Projectwimsstelzleciocoiu@outlook.fr', 'Project wims');
 				$this->email->subject('Vérification de votre compte.');
-				$this->email->message('Bonjour ! Veuillez cliquer sur ce lien afin d\'activer votre compte . https://dwarves.iut-fbleau.fr/~stelzle/Projetwims2.1_stelzle_ciocoiu/index.php/Accueil/activateUser/' . $data['clé']);
+				$this->email->message('Bonjour ! Veuillez cliquer sur ce lien afin d\'activer votre compte . https://dwarves.iut-fbleau.fr/~stelzle/Projetwims2.1_stelzle_ciocoiu/index.php/Accueil/activateUser/' . $data['cle']);
 				if ($this->email->send()) {
 					$this->Model_connexion->createNewUser($data);
 					redirect('Accueil/homePage');
-			}
+			}else{
+					echo "Office365 bloque surement l'accès à la boite mail, envoyez un message à Alban pour pouvoir débloquer la situation";
+				}
 
 		}else {
 			if($this->form_validation->error_array() == null){

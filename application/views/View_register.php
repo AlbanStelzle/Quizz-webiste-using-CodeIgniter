@@ -13,7 +13,6 @@ $data_login = array(
 $data_email = array(
 	'type'  => 'Email',
 	'name'  => 'Email',
-	'id'    => 'validationServer03',
 	'placeholder' => 'Email',
 	'class' => 'form-control ',
 );

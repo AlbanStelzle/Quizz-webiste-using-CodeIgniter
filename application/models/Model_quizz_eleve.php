@@ -9,8 +9,8 @@ class Model_quizz_eleve extends CI_Model
 
 	}
 
-	public function checkAllKeys($key){
-		$this->db->where('clédurésultat', $key);
+	public function checkAllKeys($key){ //Verifie si la clé n'existe pas dans aucune BD
+		$this->db->where('cleduresultat', $key);
 		$query = $this->db->get('ResultQuizz');
 		if ($arg = $query->num_rows() > 0) {
 			return false;
@@ -18,10 +18,10 @@ class Model_quizz_eleve extends CI_Model
 			return true;
 		}
 	}
-	public function createKey()
+	public function createKey() //Creer une clé
 	{
 		$key = random_string('numeric', 12);
-		$this->db->where('clé', $key);
+		$this->db->where('cle', $key);
 		$query = $this->db->get('Quizz');
 		if ($arg = $query->num_rows() > 0) {
 			$this->createKey();
@@ -34,22 +34,22 @@ class Model_quizz_eleve extends CI_Model
 		}
 	}
 
-	public function addReponseByEleve($data){
+	public function addReponseByEleve($data){ //Ajoute une réponse à une question par un élève
 
 		$this->db->insert('ResultQuizz', $data);
 
 	}
-	public function getQuizzKeyByEleveKey($keyeleve){
-		$this->db->where('clédurésultat', $keyeleve);
-		$this->db->select('cléduquizz');
+	public function getQuizzKeyByEleveKey($keyeleve){ //récupère la cléduquizz originel provenant de la clé élève
+		$this->db->where('cleduresultat', $keyeleve);
+		$this->db->select('cleduquizz');
 		$query=$this->db->get('ResultQuizz');
 		$result= $query->row();
-		return $result->cléduquizz;
+		return $result->cleduquizz;
 	}
 
-	public function getAllReponseQuizzEleveByKey($cléeleve){
+	public function getAllReponseQuizzEleveByKey($cleeleve){
 
-			$this->db->where('clédurésultat', $cléeleve);
+			$this->db->where('cleduresultat', $cleeleve);
 			$query = $this->db->get('ResultQuizz');
 			$result = $query->result_array();
 			$i = 0;
@@ -63,9 +63,9 @@ class Model_quizz_eleve extends CI_Model
 			return $data;
 
 	}
-	public function getAllReponseQuizzEleveByQuizzKey($clé){
+	public function getAllReponseQuizzEleveByQuizzKey($cle){
 
-		$this->db->where('cléduquizz', $clé);
+		$this->db->where('cleduquizz', $cle);
 		$query = $this->db->get('ResultQuizz');
 		$result = $query->result_array();
 		$i = 0;
@@ -81,8 +81,8 @@ class Model_quizz_eleve extends CI_Model
 	}
 	public function isResultActive($key)
 	{
-		$this->db->select('clédurésultat');
-		$this->db->where('clédurésultat', $key);
+		$this->db->select('cleduresultat');
+		$this->db->where('cleduresultat', $key);
 		$query = $this->db->get('ResultQuizz');
 		$row = $query->row();
 		if($row !== null) {

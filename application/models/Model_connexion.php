@@ -39,7 +39,7 @@ class model_connexion extends CI_Model
 	public function createKeyForUser()
 	{
 		$key = random_string('numeric', 12);
-		$this->db->where('clé', $key);
+		$this->db->where('cle', $key);
 		$query = $this->db->get('user_waiting');
 		if ($arg = $query->num_rows() > 0) {
 			$this->createKeyForUser();
@@ -52,8 +52,8 @@ class model_connexion extends CI_Model
 
 	}
 	public function ActivateAccount($key){
-		$this->db->where('clé', $key);
-		$this->db->select('login, email,password');
+		$this->db->where('cle', $key);
+		$this->db->select('login,email,password');
 		$query=$this->db->get('user_waiting');
 		foreach ($query->result() as $data)
 		{

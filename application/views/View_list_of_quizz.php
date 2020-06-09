@@ -73,7 +73,7 @@
 				<thead class="thead-dark">
 				<tr>
 					<th scope="col">Nom du quizz</th>
-					<th scope="col">Clé</th>
+					<th scope="col">cle</th>
 					<th scope="col" colspan="3">Action</th>
 					<th scope="col" >Statut</th>
 
@@ -92,10 +92,10 @@
 					for ($i = $llim; $i < $rlim; $i++) {
 						echo "<tr>";
 						echo "<th scope=\"row\">$Nom[$i] </th>";
-						echo "<th scope=\"row\">$clé[$i]</th>";
+						echo "<th scope=\"row\">$cle[$i]</th>";
 						echo "<th scope=\"row\">";
 						if(!($statut[$i]=='Expiré'||$statut[$i]=='Actif')) {
-							echo anchor("./MenuPrincipal/modifyQuizz/" . $clé[$i], 'Modifier ce quizz', array('class' => 'btn btn-warning'));
+							echo anchor("./MenuPrincipal/modifyQuizz/" . $cle[$i], 'Modifier ce quizz', array('class' => 'btn btn-warning'));
 						}else{
 							echo form_button('Useless','Modifier ce quizz',array('class'=>'btn btn-warning',
 									'disabled'=>'disabled'));
@@ -104,12 +104,12 @@
 						echo "</th>";
 
 						echo "<th scope=\"row\">";
-						echo anchor("./MenuPrincipal/CopyQuizz/" . $clé[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
+						echo anchor("./MenuPrincipal/CopyQuizz/" . $cle[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
 
 						echo "</th>";
 
 						echo "<th scope=\"row\">";
-						echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $clé[$i], 'Supprimer ce quizz',array('class'=>'btn btn-danger'));
+						echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $cle[$i], 'Supprimer ce quizz',array('class'=>'btn btn-danger'));
 						echo "</th>";
 						echo "<th scope=\"row\">$statut[$i]</th>";
 						echo "</tr>";
@@ -184,7 +184,7 @@
 				<thead class="thead-dark">
 				<tr>
 					<th scope="col">Nom du quizz</th>
-					<th scope="col">Clé</th>
+					<th scope="col">cle</th>
 					<th scope="col" colspan="4">Action</th>
 
 				</tr>
@@ -199,20 +199,20 @@
 							echo "<tr>";
 							echo "<th scope=\"row\">$Nom[$i] </th>";
 							echo "<th scope=\"row\">";
-							echo $clé[$i];
+							echo $cle[$i];
 							echo "</th>";
 							echo "<th scope=\"row\">";
 							echo form_button('Useless','Modifier ce quizz',array('class'=>'btn btn-warning',
 									'disabled'=>'disabled'));							echo "<th scope=\"row\">";
-							echo anchor("./MenuPrincipal/CopyQuizz/" . $clé[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
+							echo anchor("./MenuPrincipal/CopyQuizz/" . $cle[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
 							echo "</th>";
 							echo "</th>";
 							echo "<th scope=\"row\">";
-							echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $clé[$i], 'Supprimer ce quizz', array('class' => 'btn btn-danger'));
+							echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $cle[$i], 'Supprimer ce quizz', array('class' => 'btn btn-danger'));
 							echo "</th>";
 
 							echo "<th scope=\"row\">";
-							echo anchor('MenuPrincipal/ExpiredQuizz/' . $clé[$i], 'Désactiver ce quizz', array('class' => 'btn btn-info'));
+							echo anchor('MenuPrincipal/ExpiredQuizz/' . $cle[$i], 'Désactiver ce quizz', array('class' => 'btn btn-info'));
 							echo "</th>";
 							echo "</tr>";
 
@@ -237,7 +237,7 @@
 				<thead class="thead-dark">
 				<tr>
 					<th scope="col">Nom du quizz</th>
-					<th scope="col">Clé</th>
+					<th scope="col">cle</th>
 					<th scope="col" colspan="4">Action</th>
 
 				</tr>
@@ -252,19 +252,19 @@
 
 							echo "<tr>";
 							echo "<th scope=\"row\">$Nom[$i] </th>";
-							echo "<th scope=\"row\">$clé[$i]</th>";
+							echo "<th scope=\"row\">$cle[$i]</th>";
 							echo "<th scope=\"row\">";
-							echo anchor("./MenuPrincipal/modifyQuizz/" . $clé[$i], 'Modifier ce quizz', array('class' => 'btn btn-warning'));
+							echo anchor("./MenuPrincipal/modifyQuizz/" . $cle[$i], 'Modifier ce quizz', array('class' => 'btn btn-warning'));
 							echo "<th scope=\"row\">";
-							echo anchor("./MenuPrincipal/CopyQuizz/" . $clé[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
+							echo anchor("./MenuPrincipal/CopyQuizz/" . $cle[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
 							echo "</th>";
 							echo "</th>";
 							echo "<th scope=\"row\">";
-							echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $clé[$i], 'Supprimer ce quizz', array('class' => 'btn btn-danger'));
+							echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $cle[$i], 'Supprimer ce quizz', array('class' => 'btn btn-danger'));
 							echo "</th>";
 
 							echo "<th scope=\"row\">";
-							echo anchor('MenuPrincipal/ActiveQuizz/'.$clé[$i], 'Activer ce quizz', array('class' => 'btn btn-info'));
+							echo anchor('MenuPrincipal/ActiveQuizz/'.$cle[$i], 'Activer ce quizz', array('class' => 'btn btn-info'));
 							echo "</th>";
 
 							echo "</tr>";
@@ -303,7 +303,7 @@
 				<thead class="thead-dark">
 				<tr>
 					<th scope="col" >Nom du quizz</th>
-					<th scope="col">Clé</th>
+					<th scope="col">cle</th>
 					<th scope="col" colspan="4">Action</th>
 
 				</tr>
@@ -318,21 +318,21 @@
 
 							echo "<tr>";
 							echo "<th scope=\"row\">$Nom[$i] </th>";
-							echo "<th scope=\"row\">$clé[$i]</th>";
+							echo "<th scope=\"row\">$cle[$i]</th>";
 
 							echo "<th scope=\"row\">";
 							echo form_button('Useless','Modifier ce quizz',array('class'=>'btn btn-warning',
 									'disabled'=>'disabled'));
 							echo "<th scope=\"row\">";
-							echo anchor('/MenuPrincipal/CopyQuizz/' . $clé[$i],'Copier ce quizz',array('class' => 'btn btn-warning'));
+							echo anchor('/MenuPrincipal/CopyQuizz/' . $cle[$i],'Copier ce quizz',array('class' => 'btn btn-warning'));
 							echo "</th>";
 							echo "</th>";
 							echo "<th scope=\"row\">";
-							echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $clé[$i], 'Supprimer ce quizz', array('class' => 'btn btn-danger'));
+							echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $cle[$i], 'Supprimer ce quizz', array('class' => 'btn btn-danger'));
 							echo "</th>";
 
 							echo "<th scope=\"row\">";
-							echo anchor("/MenuPrincipal/checkResult/" . $clé[$i], 'Voir les résultat', array('class' => 'btn btn-info'));
+							echo anchor("/MenuPrincipal/checkResult/" . $cle[$i], 'Voir les résultat', array('class' => 'btn btn-info'));
 							echo "</th>";
 							echo "</tr>";
 

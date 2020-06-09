@@ -12,7 +12,7 @@ class model_quizz extends CI_Model
 	public function getAllQuizzNameAndKey($id)
 	{
 		$this->db->where('id', $id);
-		$this->db->select('Nom,clé,statut');
+		$this->db->select('Nom,cle,statut');
 		$this->db->distinct();
 		$query = $this->db->get('Quizz');
 		$result = $query->result_array();
@@ -31,7 +31,7 @@ class model_quizz extends CI_Model
 
 	public function getAllQuizzDataByKeyAndId($key, $id)
 	{
-		$this->db->where('clé', $key);
+		$this->db->where('cle', $key);
 		$this->db->where('id', $id);
 		if ($id === null) {
 			return false;
@@ -48,9 +48,10 @@ class model_quizz extends CI_Model
 		}
 		return $data;
 	}
+
 	public function getTimerFromQuizzByKey($key){
 		$this->db->select('temps');
-		$this->db->where('clé', $key);
+		$this->db->where('cle', $key);
 		$this->db->where('question', null);
 		$query=$this->db->get('Quizz');
 		foreach ($query->result() as $row) {
@@ -61,7 +62,7 @@ class model_quizz extends CI_Model
 
 	public function getAllQuizzDataByKey($key)
 	{
-		$this->db->where('clé', $key);
+		$this->db->where('cle', $key);
 		$this->db->where('question!=', null);
 		$query = $this->db->get('Quizz');
 			$result = $query->result_array();
@@ -85,7 +86,7 @@ class model_quizz extends CI_Model
 	public function createKey()
 	{
 		$key = random_string('numeric', 12);
-		$this->db->where('clé', $key);
+		$this->db->where('cle', $key);
 		$query = $this->db->get('Quizz');
 		if ($arg = $query->num_rows() > 0) {
 			$this->createKey();
@@ -101,7 +102,7 @@ class model_quizz extends CI_Model
 			'id' => $this->session->id,
 			'question' => null,
 			'Nom' => trim($title),
-			'clé' => $key,
+			'cle' => $key,
 			'statut' => 'En préparation'
 		);
 		$this->db->insert('Quizz', $data);
@@ -110,7 +111,7 @@ class model_quizz extends CI_Model
 
 	public function getNameByKey($key)
 	{
-		$this->db->where('clé', $key);
+		$this->db->where('cle', $key);
 		$this->db->select('Nom');
 		$query = $this->db->get('Quizz');
 		foreach ($query->result() as $row) {
@@ -121,7 +122,7 @@ class model_quizz extends CI_Model
 
 	public function deleteQuizzByKey($key)
 	{
-		$this->db->where('clé', $key);
+		$this->db->where('cle', $key);
 		$this->db->delete('Quizz');
 
 	}
@@ -144,21 +145,21 @@ class model_quizz extends CI_Model
 	{
 
 		$data = array('statut' => 'Actif');
-		$this->db->where('clé', $key);
+		$this->db->where('cle', $key);
 		$this->db->update('Quizz', $data);
 	}
 
 	public function ExpiredQuizzByKey($key)
 	{
 		$data = array('statut' => 'Expiré');
-		$this->db->where('clé', $key);
+		$this->db->where('cle', $key);
 		$this->db->update('Quizz', $data);
 	}
 
 	public function isQuizzActive($key)
 	{
 		$this->db->select('statut');
-		$this->db->where('clé', $key);
+		$this->db->where('cle', $key);
 		$query = $this->db->get('Quizz');
 		$row = $query->row();
 		if($row !== null) {
@@ -174,9 +175,9 @@ class model_quizz extends CI_Model
 	public function isQuizzExpired($key)
 	{
 		$this->db->select('statut');
-		$this->db->where('clédurésultat', $key);
+		$this->db->where('cleduresultat', $key);
 		$this->db->from('ResultQuizz');
-		$this->db->join('Quizz', 'Quizz.clé = ResultQuizz.cléduquizz');
+		$this->db->join('Quizz', 'Quizz.cle = ResultQuizz.cleduquizz');
 		$query = $this->db->get();
 		$row = $query->row();
 		if($row !== null) {
@@ -191,13 +192,13 @@ class model_quizz extends CI_Model
 	}
 	public function CopyQuizzByData($key){
 		$newKey=$this->createKey();
-		$this->db->where('clé', $key);
+		$this->db->where('cle', $key);
 		$query = $this->db->get('Quizz');
 		$result = $query->result_array();
 		foreach ($result as $row) {
 			foreach ($row as $key2 => $value) {
 				$data[$key2] = $value;
-				$data['clé']=$newKey;
+				$data['cle']=$newKey;
 				$data['statut']="En préparation";
 				$data['idQuestion']=null;
 
@@ -208,7 +209,7 @@ class model_quizz extends CI_Model
 		}
 	}
 	public function modifyTimerOnQuizzByKey($data){
-		$this->db->where('clé', $data['clé']);
+		$this->db->where('cle', $data['cle']);
 		$this->db->update('Quizz', $data);
 	}
 
