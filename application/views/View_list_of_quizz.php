@@ -30,6 +30,7 @@
 		}
 
 		?>
+			<!-- Script qui permet de retenir sur quel onglet nous sommes -->
 		<script>
 		$(document).ready(function(){
 			$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
@@ -41,6 +42,7 @@
 			}
 		});
 		</script>
+
 		</head>
 		<div class="w-auto">
 			<div class="alert alert-info my-0" role="alert">
@@ -90,15 +92,10 @@
 					for ($i = $llim; $i < $rlim; $i++) {
 						echo "<tr>";
 						echo "<th scope=\"row\">$Nom[$i] </th>";
-						echo "<th scope=\"row\">";
-						echo $clé[$i];
-						echo form_close();
-						echo "</th>";
+						echo "<th scope=\"row\">$clé[$i]</th>";
 						echo "<th scope=\"row\">";
 						if(!($statut[$i]=='Expiré'||$statut[$i]=='Actif')) {
-							echo form_open("./MenuPrincipal/modifyQuizz/" . $clé[$i]);
-							echo form_submit('ModifyQuizz' . $clé[$i], 'Modifier ce quizz', array('class' => 'btn btn-warning'));
-							echo form_close();
+							echo anchor("./MenuPrincipal/modifyQuizz/" . $clé[$i], 'Modifier ce quizz', array('class' => 'btn btn-warning'));
 						}else{
 							echo form_button('Useless','Modifier ce quizz',array('class'=>'btn btn-warning',
 									'disabled'=>'disabled'));
@@ -107,15 +104,12 @@
 						echo "</th>";
 
 						echo "<th scope=\"row\">";
-						echo form_open("./MenuPrincipal/CopyQuizz/" . $clé[$i]);
-						echo form_submit('CopyQuizz' . $clé[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
-						echo form_close();
+						echo anchor("./MenuPrincipal/CopyQuizz/" . $clé[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
+
 						echo "</th>";
 
 						echo "<th scope=\"row\">";
-						echo form_open("./MenuPrincipal/deleteQuizzByKey/" . $clé[$i]);
-						echo form_submit("DelQuizz['$i']", 'Supprimer ce quizz',array('class'=>'btn btn-danger'));
-						echo form_close();
+						echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $clé[$i], 'Supprimer ce quizz',array('class'=>'btn btn-danger'));
 						echo "</th>";
 						echo "<th scope=\"row\">$statut[$i]</th>";
 						echo "</tr>";
@@ -206,29 +200,19 @@
 							echo "<th scope=\"row\">$Nom[$i] </th>";
 							echo "<th scope=\"row\">";
 							echo $clé[$i];
-							echo form_close();
 							echo "</th>";
 							echo "<th scope=\"row\">";
-							echo form_open("./MenuPrincipal/modifyQuizz/" . $clé[$i]);
-							echo form_submit('ModifyQuizz' . $clé[$i], 'Modifier ce quizz', array('class'=>'btn btn-warning',
-									'disabled'=>'disabled'));
-							echo form_close();
-							echo "<th scope=\"row\">";
-							echo form_open("./MenuPrincipal/CopyQuizz/" . $clé[$i]);
-							echo form_submit('CopyQuizz' . $clé[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
-							echo form_close();
+							echo form_button('Useless','Modifier ce quizz',array('class'=>'btn btn-warning',
+									'disabled'=>'disabled'));							echo "<th scope=\"row\">";
+							echo anchor("./MenuPrincipal/CopyQuizz/" . $clé[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
 							echo "</th>";
 							echo "</th>";
 							echo "<th scope=\"row\">";
-							echo form_open("./MenuPrincipal/deleteQuizzByKey/" . $clé[$i]);
-							echo form_submit("DelQuizz['$i']", 'Supprimer ce quizz', array('class' => 'btn btn-danger'));
-							echo form_close();
+							echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $clé[$i], 'Supprimer ce quizz', array('class' => 'btn btn-danger'));
 							echo "</th>";
 
 							echo "<th scope=\"row\">";
-							echo form_open('MenuPrincipal/ExpiredQuizz/' . $clé[$i]);
-							echo form_submit("DisableQuizz['$i']", 'Désactiver ce quizz', array('class' => 'btn btn-info'));
-							echo form_close();
+							echo anchor('MenuPrincipal/ExpiredQuizz/' . $clé[$i], 'Désactiver ce quizz', array('class' => 'btn btn-info'));
 							echo "</th>";
 							echo "</tr>";
 
@@ -268,30 +252,19 @@
 
 							echo "<tr>";
 							echo "<th scope=\"row\">$Nom[$i] </th>";
+							echo "<th scope=\"row\">$clé[$i]</th>";
 							echo "<th scope=\"row\">";
-							echo $clé[$i];
-							echo form_close();
-							echo "</th>";
+							echo anchor("./MenuPrincipal/modifyQuizz/" . $clé[$i], 'Modifier ce quizz', array('class' => 'btn btn-warning'));
 							echo "<th scope=\"row\">";
-							echo form_open("./MenuPrincipal/modifyQuizz/" . $clé[$i]);
-							echo form_submit('ModifyQuizz' . $clé[$i], 'Modifier ce quizz', array('class' => 'btn btn-warning'));
-							echo form_close();
-							echo "<th scope=\"row\">";
-							echo form_open("./MenuPrincipal/CopyQuizz/" . $clé[$i]);
-							echo form_submit('CopyQuizz' . $clé[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
-							echo form_close();
+							echo anchor("./MenuPrincipal/CopyQuizz/" . $clé[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
 							echo "</th>";
 							echo "</th>";
 							echo "<th scope=\"row\">";
-							echo form_open("./MenuPrincipal/deleteQuizzByKey/" . $clé[$i]);
-							echo form_submit("DelQuizz['$i']", 'Supprimer ce quizz', array('class' => 'btn btn-danger'));
-							echo form_close();
+							echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $clé[$i], 'Supprimer ce quizz', array('class' => 'btn btn-danger'));
 							echo "</th>";
 
 							echo "<th scope=\"row\">";
-							echo form_open('MenuPrincipal/ActiveQuizz/'.$clé[$i]);
-							echo form_submit("ActivateQuizz", 'Activer ce quizz', array('class' => 'btn btn-info'));
-							echo form_close();
+							echo anchor('MenuPrincipal/ActiveQuizz/'.$clé[$i], 'Activer ce quizz', array('class' => 'btn btn-info'));
 							echo "</th>";
 
 							echo "</tr>";
@@ -301,8 +274,6 @@
 				}else{
 					echo"<tr>
 							<th colspan='5' class='text-center'>Vous n'avez aucun quizz de créer.</th>
-		
-		
 						 </tr>";
 				}
 				echo "<tr>";
@@ -347,31 +318,21 @@
 
 							echo "<tr>";
 							echo "<th scope=\"row\">$Nom[$i] </th>";
+							echo "<th scope=\"row\">$clé[$i]</th>";
+
 							echo "<th scope=\"row\">";
-							echo $clé[$i];
-							echo form_close();
-							echo "</th>";
-							echo "<th scope=\"row\">";
-							echo form_open("./MenuPrincipal/modifyQuizz/" . $clé[$i]);
-							echo form_submit('ModifyQuizz' . $clé[$i], 'Modifier ce quizz', array('class'=>'btn btn-warning',
+							echo form_button('Useless','Modifier ce quizz',array('class'=>'btn btn-warning',
 									'disabled'=>'disabled'));
-							echo form_close();
 							echo "<th scope=\"row\">";
-							echo form_open("./MenuPrincipal/CopyQuizz/" . $clé[$i]);
-							echo form_submit('CopyQuizz' . $clé[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
-							echo form_close();
+							echo anchor('/MenuPrincipal/CopyQuizz/' . $clé[$i],'Copier ce quizz',array('class' => 'btn btn-warning'));
 							echo "</th>";
 							echo "</th>";
 							echo "<th scope=\"row\">";
-							echo form_open("./MenuPrincipal/deleteQuizzByKey/" . $clé[$i]);
-							echo form_submit("DelQuizz['$i']", 'Supprimer ce quizz', array('class' => 'btn btn-danger'));
-							echo form_close();
+							echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $clé[$i], 'Supprimer ce quizz', array('class' => 'btn btn-danger'));
 							echo "</th>";
 
 							echo "<th scope=\"row\">";
-							echo form_open("/MenuPrincipal/checkResult/" . $clé[$i]);
-							echo form_submit("VoirRésultat['$i']", 'Voir les résultat', array('class' => 'btn btn-info'));
-							echo form_close();
+							echo anchor("/MenuPrincipal/checkResult/" . $clé[$i], 'Voir les résultat', array('class' => 'btn btn-info'));
 							echo "</th>";
 							echo "</tr>";
 

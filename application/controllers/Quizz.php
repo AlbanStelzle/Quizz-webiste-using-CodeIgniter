@@ -7,11 +7,12 @@ class Quizz extends CI_Controller
 		$this->load->library('session');
 		$this->load->helper('url');
 		$this->load->library('form_validation');
+		$this->load->model('Model_quizz');
+
 	}
 
 	public function joinQuizz() //permet à un élève de lancer un quizz et d'y répondre
 	{
-		$this->load->model('Model_quizz');
 		$this->form_validation->set_rules('clé', 'clé', 'callback_is_active');
 		$this->form_validation->set_message('is_active', 'Votre clé est incorrecte ou n\'est pas active.');
 		if ($this->form_validation->run()) {
@@ -33,11 +34,10 @@ class Quizz extends CI_Controller
 		}
 
 	public function is_active($key){ //Permet de vérifier si le quizz est actif
-		$this->load->model('Model_quizz');
 		return $this->Model_quizz->isQuizzActive($key);
 	}
 	public function is_expired($key){ //Permet de vérifier si le quizz est inactif
-		$this->load->model('Model_quizz');
+
 		return $this->Model_quizz->isQuizzExpired($key);
 	}
 
@@ -47,7 +47,7 @@ class Quizz extends CI_Controller
 	}
 	public function finishQuizz($key){ // récupère toutes les données du quizz fait par un élève et affiche la page de fin avec la clé élève pour ses résultats
 		$this->load->model('Model_quizz_eleve');
-		$this->load->model('Model_quizz');
+
 		$dataQuizz = $this->Model_quizz->getAllQuizzDataByKey($key);
 		$i=0;
 		$cléeleve=$this->Model_quizz_eleve->createKey();
@@ -99,7 +99,7 @@ class Quizz extends CI_Controller
 
 		if ($this->form_validation->run()) {
 			$cléeleve=$this->input->post('clédurésultat');
-			$this->load->model('Model_quizz');
+
 			$this->load->model('Model_quizz_eleve');
 			$cléquizz=$this->Model_quizz_eleve->getQuizzKeyByEleveKey($cléeleve);
 			$dataquizz=$this->Model_quizz->getAllQuizzDataByKey($cléquizz);

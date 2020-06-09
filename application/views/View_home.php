@@ -12,9 +12,7 @@ $this->load->library('session');
 
 ?>
 <div class="container" style="width: 500px;margin-top: 200px; text-align: center;">
-<!-- 	<div class="col">
-		
-	</div> -->
+
 	<?php
 	$name=$this->session->login;
 	echo "<h1> Bienvenue</h1>";

@@ -80,7 +80,6 @@ class Accueil extends CI_Controller
 	 		} else {
 	 			$this->load->view('template/View_template_center');
 	 			$this->load->view('template/View_template');
-
 	 			$this->load->view('errors/View_login_error');
 
 	 		}
