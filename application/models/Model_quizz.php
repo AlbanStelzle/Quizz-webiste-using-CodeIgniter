@@ -48,7 +48,24 @@ class model_quizz extends CI_Model
 		}
 		return $data;
 	}
+	public function getAllQuizzDataById($id)
+	{
+		$this->db->where('id', $id);
+		if ($id === null) {
+			return false;
+		}
+		$query = $this->db->get('Quizz');
+		$result = $query->result_array();
+		$i = 0;
+		foreach ($result as $row) {
+			foreach ($row as $key2 => $value) {
+				$data[$key2][$i] = $value;
+			}
+			$i++;
 
+		}
+		return $data;
+	}
 	public function getTimerFromQuizzByKey($key){
 		$this->db->select('temps');
 		$this->db->where('cle', $key);
@@ -103,6 +120,7 @@ class model_quizz extends CI_Model
 			'question' => null,
 			'Nom' => trim($title),
 			'cle' => $key,
+			'temps'=>'1', //minimum 1min
 			'statut' => 'En préparation'
 		);
 		$this->db->insert('Quizz', $data);

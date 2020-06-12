@@ -37,11 +37,11 @@
 		$moy=0;
 		for ($i = 0; $i < sizeof($dataquizz['idQuestion']); $i++) {
 			$scoretotal[$i]=0;
-			$réponses1total=0;
-			$réponses2total=0;
-			$réponses3total=0;
-			$réponses4total=0;
-			$réponsestotal=0;
+			$reponses1total=0;
+			$reponses2total=0;
+			$reponses3total=0;
+			$reponses4total=0;
+			$reponsestotal=0;
 
 			$nbTotalRep=0;
 			echo "<tr>";
@@ -76,7 +76,7 @@
 			echo "</th>";
 
 			echo "<th scope=\"row\">";
-			echo $dataquizz['BonneRéponse'][$i];
+			echo $dataquizz['BonneReponse'][$i];
 			echo "</th>";
 			echo "<th scope=\"row\" class='bg-dark' >";
 			echo "</th>";
@@ -84,56 +84,56 @@
 			for ($y = 0; $y < sizeof($dataResultQuizz['id']); $y++) {
 				echo "<tr>";
 				if($dataquizz['idQuestion'][$i]==$dataResultQuizz['idQuestion'][$y]) {
-					if(strlen($dataResultQuizz['réponseséleve'][$y])==1){
-						if($dataResultQuizz['réponseséleve'][$y]==1){
-							$réponses1total++;
-							$réponsestotal++;
+					if(strlen($dataResultQuizz['reponseseleve'][$y])==1){
+						if($dataResultQuizz['reponseseleve'][$y]==1){
+							$reponses1total++;
+							$reponsestotal++;
 
-						}elseif($dataResultQuizz['réponseséleve'][$y]==2){
-							$réponses2total++;
-							$réponsestotal++;
+						}elseif($dataResultQuizz['reponseseleve'][$y]==2){
+							$reponses2total++;
+							$reponsestotal++;
 
-						}elseif($dataResultQuizz['réponseséleve'][$y]==3){
-							$réponses3total++;
-							$réponsestotal++;
+						}elseif($dataResultQuizz['reponseseleve'][$y]==3){
+							$reponses3total++;
+							$reponsestotal++;
 
-						}elseif($dataResultQuizz['réponseséleve'][$y]==4){
-							$réponses4total++;
-							$réponsestotal++;
+						}elseif($dataResultQuizz['reponseseleve'][$y]==4){
+							$reponses4total++;
+							$reponsestotal++;
 
 						}
 					}else{
 
-						$dataréponse[$y]=str_replace(',','',$dataResultQuizz['réponseséleve'][$y]);
+						$datareponse[$y]=str_replace(',','',$dataResultQuizz['reponseseleve'][$y]);
 
-						foreach($dataréponse as $char) {
+						foreach($datareponse as $char) {
 
 							for($z=0;$z<strlen($char);$z++){
 								if($char[$z]==1){
-									$réponses1total++;
-									$réponsestotal++;
+									$reponses1total++;
+									$reponsestotal++;
 								}
 								if($char[$z]==2){
-									$réponses2total++;
-									$réponsestotal++;
+									$reponses2total++;
+									$reponsestotal++;
 								}
 								if($char[$z]==3){
-									$réponses3total++;
-									$réponsestotal++;
+									$reponses3total++;
+									$reponsestotal++;
 								}
 								if($char[$z]==4){
-									$réponses4total++;
-									$réponsestotal++;
+									$reponses4total++;
+									$reponsestotal++;
 								}
 							}
 
 						}
 					}
 					echo "<th scope=\"row\">";
-					echo $dataResultQuizz['noméleve'][$y];
+					echo $dataResultQuizz['nomeleve'][$y];
 					echo "</th>";
 					echo "<th scope=\"row\">";
-					echo $dataResultQuizz['prenoméleve'][$y];
+					echo $dataResultQuizz['prenomeleve'][$y];
 					echo "</th>";
 					echo "<th scope=\"row\">";
 					echo "</th>";
@@ -148,15 +148,15 @@
 					echo "</th>";
 
 					echo "<th scope=\"row\">";
-					echo $dataResultQuizz['réponseséleve'][$y];
+					echo $dataResultQuizz['reponseseleve'][$y];
 					echo "</th>";
 
 					echo "<th scope=\"row\">";
-					echo $dataquizz['BonneRéponse'][$i];
+					echo $dataquizz['BonneReponse'][$i];
 					echo "</th>";
 
 
-					if (strcmp($dataResultQuizz['réponseséleve'][$y], $dataquizz['BonneRéponse'][$i]) == 0) {
+					if (strcmp($dataResultQuizz['reponseseleve'][$y], $dataquizz['BonneReponse'][$i]) == 0) {
 						$scoretotal[$i]++;
 						$RepColor = "bg-success";
 						echo "<th scope=\"row \" class=\"$RepColor\">";
@@ -176,16 +176,16 @@
 			$scorePercent[$i]=number_format($scorePercent[$i],2);
 
 
-			$réponses1total=($réponses1total/$réponsestotal)*100;
-			$réponses2total=($réponses2total/$réponsestotal)*100;
-			$réponses3total=($réponses3total/$réponsestotal)*100;
-			$réponses4total=($réponses4total/$réponsestotal)*100;
+			$reponses1total=($reponses1total/$reponsestotal)*100;
+			$reponses2total=($reponses2total/$reponsestotal)*100;
+			$reponses3total=($reponses3total/$reponsestotal)*100;
+			$reponses4total=($reponses4total/$reponsestotal)*100;
 			echo "<th colspan='6'>";/* A travailler ici */
 			echo"<div class=\"progress\"> 
-			  <div class=\"progress-bar\" role=\"progressbar\" style=\"width: $réponses1total%\" aria-valuenow=\"$réponses1total\" aria-valuemin=\"0\" aria-valuemax=\"2\"> Réponse1: $réponses1total%</div>
-			  <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: $réponses2total%\" aria-valuenow=\"$réponses2total\" aria-valuemin=\"0\" aria-valuemax=\"100\">Réponse2: $réponses2total%</div>
-			  <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: $réponses3total%\" aria-valuenow=\"$réponses3total\" aria-valuemin=\"0\" aria-valuemax=\"100\">Réponse3: $réponses3total%</div>
-			  <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: $réponses4total% \" aria-valuenow=\"$réponses4total\" aria-valuemin=\"0\" aria-valuemax=\"100\">Réponse4: $réponses4total%</div>
+			  <div class=\"progress-bar\" role=\"progressbar\" style=\"width: $reponses1total%\" aria-valuenow=\"$reponses1total\" aria-valuemin=\"0\" aria-valuemax=\"2\"> Réponse1: $reponses1total%</div>
+			  <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: $reponses2total%\" aria-valuenow=\"$reponses2total\" aria-valuemin=\"0\" aria-valuemax=\"100\">Réponse2: $reponses2total%</div>
+			  <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: $reponses3total%\" aria-valuenow=\"$reponses3total\" aria-valuemin=\"0\" aria-valuemax=\"100\">Réponse3: $reponses3total%</div>
+			  <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: $reponses4total% \" aria-valuenow=\"$reponses4total\" aria-valuemin=\"0\" aria-valuemax=\"100\">Réponse4: $reponses4total%</div>
 
 			</div>";
 			echo "</th>";

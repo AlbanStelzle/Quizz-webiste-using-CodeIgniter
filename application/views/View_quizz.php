@@ -70,6 +70,7 @@
 			'placeholder' => 'Timer pour ce quizz (en minute)',
 			'class' => 'form-control mx-auto',
 			'style'=>'width:260px',
+		'maxlength'=>'3'
 	);
 	?>
 </head>
@@ -199,7 +200,7 @@
 		echo form_input($data_temps);
 		echo form_submit('Ajouter du temps','Ajouter le timer',array('class'=>'btn btn-primary '));
 		echo form_close();
-		echo anchor('MenuPrincipal/','Retour au menu principal',array('class'=>'btn btn-outline-danger mb-4'));
+		echo anchor('MenuPrincipal/quizzHub','Retour à la liste des quizz',array('class'=>'btn btn-outline-danger mb-4'));
 		echo "</div>";
 		?>
 </div>

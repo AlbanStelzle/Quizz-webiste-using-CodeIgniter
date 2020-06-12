@@ -142,7 +142,6 @@ class Accueil extends CI_Controller
 		}
 		public function activateUser($key){ //Permet d'activé un compte via le lien reçu par mail
 			$this->Model_connexion->ActivateAccount($key);
-			redirect('Accueil/homePage');
 
 		}
 		public function join(){ // Affiche la vue qui permet de lancer un quizz
