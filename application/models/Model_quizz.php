@@ -120,7 +120,7 @@ class model_quizz extends CI_Model
 			'question' => null,
 			'Nom' => trim($title),
 			'cle' => $key,
-			'temps'=>'1', //minimum 1min
+			'temps'=>'0', //pas de temps défini
 			'statut' => 'En préparation'
 		);
 		$this->db->insert('Quizz', $data);

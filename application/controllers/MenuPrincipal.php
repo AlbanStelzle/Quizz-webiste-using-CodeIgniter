@@ -43,6 +43,14 @@ class MenuPrincipal extends CI_Controller
 		}
 
 	}
+	public function viewQuizz($key){ //Affiche la page qui permet de voir ce que contient un quizz
+		if(($data=$this->Model_quizz->getAllQuizzDataByKeyAndId($key,$this->session->id)) != null){
+			$this->load->view('template/View_template');
+			$this->load->view('View_quizz_unmodified',$data);
+
+		}
+
+	}
 	public function addQuizzByTitle(){ //fonction qui ajoute un quizz
 		$this->form_validation->set_rules('QuizzName', 'QuizzName', 'required|htmlentities');
 		$key=$this->Model_quizz->createKey();
@@ -152,7 +160,7 @@ class MenuPrincipal extends CI_Controller
 	}
 	public function modifyTimer($key){ //Ajoute ou modifie le timer d'un quizz
 		$timer= $this->input->post('timer');
-		$this->form_validation->set_rules('timer', 'Chrono', 'greater_than[0]|max_length[3]');
+		$this->form_validation->set_rules('timer', 'Chrono', 'max_length[3]');
 		if ($this->form_validation->run()) {
 			$data['temps']=$timer;
 			$data['cle']=$key;

@@ -9,14 +9,14 @@ $data_cle = array(
 );
 $data_prenom = array(
 		'type'  => 'text',
-		'name'  => 'prenomeleve',
+		'name'  => 'prenom',
 		'placeholder' => 'Prénom',
 		'class' => "form-control ",
 		'required' => 'required'
 );
 $data_nom = array(
 		'type'  => 'text',
-		'name'  => 'nomeleve',
+		'name'  => 'nom',
 		'placeholder' => 'Nom',
 		'class' => "form-control ",
 		'required' => 'required'

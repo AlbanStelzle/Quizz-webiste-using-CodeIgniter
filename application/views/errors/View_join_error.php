@@ -1,17 +1,17 @@
 <?php
-$clé=$_POST['clé'] ?? "";
+$cle=$_POST['clé'] ?? "";
 $prenom=$_POST['prenom'] ?? "";
 $nom=$_POST['nom'] ?? "";
 
-if(form_error('clé')==null){
+if(form_error('cle')==null){
 	$validation_key= "is-valid";
 }else{
 	$validation_key ="is-invalid";
 }
-$data_clé = array(
+$data_cle = array(
 	'type'  => 'text',
-	'name'  => 'clé',
-	'value'=>$clé,
+	'name'  => 'cle',
+	'value'=>$cle,
 	'placeholder' => 'Entrez la clé du quizz',
 	'class' => "form-control $validation_key",
 	'required' => 'required'
@@ -38,7 +38,7 @@ $data_nom = array(
 	<?php  echo form_open('Quizz/joinQuizz/',array('class'=>'form-signin'));
 	echo"<h1 class=\" h3 mb-3 font-weight-normal\">Quizz</h1>";
 
-	echo form_input($data_clé);
+	echo form_input($data_cle);
 	echo form_error('clé','<div class="invalid-feedback">','</div>');
 	echo "<br>";
 

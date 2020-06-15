@@ -67,10 +67,10 @@
 	$data_temps = array(
 			'type' => 'text',
 			'name' => 'timer',
-			'placeholder' => 'Timer pour ce quizz (en minute)',
+			'placeholder' => 'Temps max (en minute) 0 pour temps infini',
 			'class' => 'form-control mx-auto',
-			'style'=>'width:260px',
-		'maxlength'=>'3'
+			'style'=>'width:17.05%',
+			'maxlength'=>'3'
 	);
 	?>
 </head>
@@ -195,7 +195,12 @@
 		echo "</tbody>";
 		echo "</table>";
 		echo "<div class=\"text-center\">";
-		echo "<p> Temps actuel pour ce quizz : $temps[0] min.";
+		if($temps[0]==0){
+			echo "<p> Ce quizz n'a pas de temps imparti.</p>";
+
+		}else {
+			echo "<p> Temps actuel pour ce quizz : $temps[0] min.</p>";
+		}
 		echo form_open('MenuPrincipal/modifyTimer/'.$cle[0]);
 		echo form_input($data_temps);
 		echo form_submit('Ajouter du temps','Ajouter le timer',array('class'=>'btn btn-primary '));

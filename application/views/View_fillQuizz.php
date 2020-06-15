@@ -9,21 +9,23 @@
 		heure=Math.trunc(tempsmax/60);
 		min=tempsmax-heure*60-1;
 	}
-	setTimeout('document.getElementById(\'form\').submit();',(tempsmax*60*1000));
-	setInterval(function(){
-		sec--;
-		if(sec<0){
-			min--;
-			sec=59;
-		}
-		if(min==0){
-			if(heure!=0) {
-				heure--;
-				min = 59;
+	if(tempsmax!=0) {
+		setTimeout('document.getElementById(\'form\').submit();', (tempsmax * 60 * 1000));
+		setInterval(function () {
+			sec--;
+			if (sec < 0) {
+				min--;
+				sec = 59;
 			}
-		}
-		document.getElementById("timing").innerHTML='Temps restant: '+heure.toString()+":"+min.toString() +':'+ sec.toString();
-	},1000);
+			if (min == 0) {
+				if (heure != 0) {
+					heure--;
+					min = 59;
+				}
+			}
+			document.getElementById("timing").innerHTML = 'Temps restant: ' + heure.toString() + ":" + min.toString() + ':' + sec.toString();
+		}, 1000);
+	}
 
 </script>
 <!-- Fin timer -->

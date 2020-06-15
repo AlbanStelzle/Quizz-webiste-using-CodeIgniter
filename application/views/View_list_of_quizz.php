@@ -66,7 +66,7 @@
 	</ul>
 
 	<div class="tab-content " id="myTabContent">
-		<div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="all-tab">
+		<div class="tab-pane" id="all" role="tabpanel" aria-labelledby="all-tab">
 			<div class="table-responsive">
 
 				<table class="table table-hover table-bordered">
@@ -95,21 +95,20 @@
 							echo "<th scope=\"row\">$cle[$i]</th>";
 							echo "<th scope=\"row\">";
 							if(!($statut[$i]=='Expiré'||$statut[$i]=='Actif')) {
-								echo anchor("./MenuPrincipal/modifyQuizz/" . $cle[$i], 'Modifier ce quizz', array('class' => 'btn btn-warning'));
+								echo anchor("./MenuPrincipal/modifyQuizz/" . $cle[$i], 'Modifier ce quizz', array('class' => 'btn btn-warning ','style'=>'width:50%;'));
 							}else{
-								echo form_button('Useless','Modifier ce quizz',array('class'=>'btn btn-warning',
-										'disabled'=>'disabled'));
+								echo anchor("./MenuPrincipal/viewQuizz/" . $cle[$i], 'Voir ce quizz', array('class' => 'btn btn-warning ','style'=>'width:50%;'));
 							}
 
 							echo "</th>";
 
 							echo "<th scope=\"row\">";
-							echo anchor("./MenuPrincipal/CopyQuizz/" . $cle[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
+							echo anchor("./MenuPrincipal/CopyQuizz/" . $cle[$i], 'Copier ce quizz', array('class' => 'btn btn-warning','style'=>'width:50%;'));
 
 							echo "</th>";
 
 							echo "<th scope=\"row\">";
-							echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $cle[$i], 'Supprimer ce quizz',array('class'=>'btn btn-danger'));
+							echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $cle[$i], 'Supprimer ce quizz',array('class'=>'btn btn-danger','style'=>'width:50%;'));
 							echo "</th>";
 							echo "<th scope=\"row\">$statut[$i]</th>";
 							echo "</tr>";
@@ -177,7 +176,7 @@
 			</div>
 
 		</div>
-		<div class="tab-pane fade show active" id="actif" role="tabpanel" aria-labelledby="actif-tab">
+		<div class="tab-pane show active" id="actif" role="tabpanel" aria-labelledby="actif-tab">
 			<div class="table-responsive">
 
 				<table class="table table-hover table-bordered">
@@ -202,17 +201,17 @@
 								echo $cle[$i];
 								echo "</th>";
 								echo "<th scope=\"row\">";
-								echo form_button('Useless','Modifier ce quizz',array('class'=>'btn btn-warning',
-										'disabled'=>'disabled'));							echo "<th scope=\"row\">";
-								echo anchor("./MenuPrincipal/CopyQuizz/" . $cle[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
+								echo anchor("./MenuPrincipal/viewQuizz/" . $cle[$i], 'Voir ce quizz', array('class' => 'btn btn-warning ','style'=>'width:50%;'));
+								echo "<th scope=\"row\">";
+								echo anchor("./MenuPrincipal/CopyQuizz/" . $cle[$i], 'Copier ce quizz', array('class' => 'btn btn-warning','style'=>'width:50%;'));
 								echo "</th>";
 								echo "</th>";
 								echo "<th scope=\"row\">";
-								echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $cle[$i], 'Supprimer ce quizz', array('class' => 'btn btn-danger'));
+								echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $cle[$i], 'Supprimer ce quizz', array('class' => 'btn btn-danger','style'=>'width:50%;'));
 								echo "</th>";
 
 								echo "<th scope=\"row\">";
-								echo anchor('MenuPrincipal/ExpiredQuizz/' . $cle[$i], 'Désactiver ce quizz', array('class' => 'btn btn-info'));
+								echo anchor('MenuPrincipal/ExpiredQuizz/' . $cle[$i], 'Désactiver ce quizz', array('class' => 'btn btn-info','style'=>'width:50%;'));
 								echo "</th>";
 								echo "</tr>";
 
@@ -230,7 +229,7 @@
 			</div>
 
 		</div>
-		<div class="tab-pane fade" id="préparation" role="tabpanel" aria-labelledby="préparation-tab">
+		<div class="tab-pane" id="préparation" role="tabpanel" aria-labelledby="préparation-tab">
 			<div class="table-responsive">
 
 				<table class="table table-hover table-bordered">
@@ -254,17 +253,17 @@
 								echo "<th scope=\"row\">$Nom[$i] </th>";
 								echo "<th scope=\"row\">$cle[$i]</th>";
 								echo "<th scope=\"row\">";
-								echo anchor("./MenuPrincipal/modifyQuizz/" . $cle[$i], 'Modifier ce quizz', array('class' => 'btn btn-warning'));
+								echo anchor("./MenuPrincipal/modifyQuizz/" . $cle[$i], 'Modifier ce quizz', array('class' => 'btn btn-warning','style'=>'width:55%;'));
 								echo "<th scope=\"row\">";
-								echo anchor("./MenuPrincipal/CopyQuizz/" . $cle[$i], 'Copier ce quizz', array('class' => 'btn btn-warning'));
+								echo anchor("./MenuPrincipal/CopyQuizz/" . $cle[$i], 'Copier ce quizz', array('class' => 'btn btn-warning','style'=>'width:55%;'));
 								echo "</th>";
 								echo "</th>";
 								echo "<th scope=\"row\">";
-								echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $cle[$i], 'Supprimer ce quizz', array('class' => 'btn btn-danger'));
+								echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $cle[$i], 'Supprimer ce quizz', array('class' => 'btn btn-danger','style'=>'width:55%;'));
 								echo "</th>";
 
 								echo "<th scope=\"row\">";
-								echo anchor('MenuPrincipal/ActiveQuizz/'.$cle[$i], 'Activer ce quizz', array('class' => 'btn btn-info'));
+								echo anchor('MenuPrincipal/ActiveQuizz/'.$cle[$i], 'Activer ce quizz', array('class' => 'btn btn-info','style'=>'width:55%;'));
 								echo "</th>";
 
 								echo "</tr>";
@@ -296,7 +295,8 @@
 			</div>
 
 		</div>
-		<div class="tab-pane fade" id="expiré" role="tabpanel" aria-labelledby="expiré-tab">
+
+		<div class="tab-pane" id="expiré" role="tabpanel" aria-labelledby="expiré-tab">
 			<div class="table-responsive">
 
 				<table class="table table-hover table-bordered">
@@ -321,18 +321,18 @@
 								echo "<th scope=\"row\">$cle[$i]</th>";
 
 								echo "<th scope=\"row\">";
-								echo form_button('Useless','Modifier ce quizz',array('class'=>'btn btn-warning',
-										'disabled'=>'disabled'));
+								echo anchor("./MenuPrincipal/viewQuizz/" . $cle[$i], 'Voir ce quizz', array('class' => 'btn btn-warning ','style'=>'width:50%;'));
+
 								echo "<th scope=\"row\">";
-								echo anchor('/MenuPrincipal/CopyQuizz/' . $cle[$i],'Copier ce quizz',array('class' => 'btn btn-warning'));
+								echo anchor('/MenuPrincipal/CopyQuizz/' . $cle[$i],'Copier ce quizz',array('class' => 'btn btn-warning','style'=>'width:50%;'));
 								echo "</th>";
 								echo "</th>";
 								echo "<th scope=\"row\">";
-								echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $cle[$i], 'Supprimer ce quizz', array('class' => 'btn btn-danger'));
+								echo anchor("./MenuPrincipal/deleteQuizzByKey/" . $cle[$i], 'Supprimer ce quizz', array('class' => 'btn btn-danger','style'=>'width:50%;'));
 								echo "</th>";
 
 								echo "<th scope=\"row\">";
-								echo anchor("/MenuPrincipal/checkResult/" . $cle[$i], 'Voir les résultat', array('class' => 'btn btn-info'));
+								echo anchor("/MenuPrincipal/checkResult/" . $cle[$i], 'Voir les résultat', array('class' => 'btn btn-info','style'=>'width:50%;'));
 								echo "</th>";
 								echo "</tr>";
 
