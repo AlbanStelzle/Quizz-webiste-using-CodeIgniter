@@ -116,7 +116,7 @@
 						}
 					}else{
 						echo"<tr>
-							<th colspan='5' class='text-center'>Vous n'avez aucun quizz de créer.</th>
+							<th colspan='6' class='text-center'>Vous n'avez aucun quizz de créé.</th>
 						 </tr>";
 					}
 
@@ -219,7 +219,7 @@
 						}
 					}else{
 						echo"<tr>
-							<th colspan='5' class='text-center'>Vous n'avez aucun quizz de créer.</th>
+							<th colspan='5' class='text-center'>Vous n'avez aucun quizz de créé.</th>
 						 </tr>";
 					}
 
@@ -272,7 +272,7 @@
 						}
 					}else{
 						echo"<tr>
-							<th colspan='5' class='text-center'>Vous n'avez aucun quizz de créer.</th>
+							<th colspan='5' class='text-center'>Vous n'avez aucun quizz de créé.</th>
 						 </tr>";
 					}
 					echo "<tr>";
@@ -340,7 +340,7 @@
 						}
 					}else{
 						echo"<tr>
-							<th colspan='5' class='text-center'>Vous n'avez aucun quizz de créer.</th>
+							<th colspan='5' class='text-center'>Vous n'avez aucun quizz de créé.</th>
 						 </tr>";
 					}
 
